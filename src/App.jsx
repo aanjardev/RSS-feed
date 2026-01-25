@@ -98,7 +98,7 @@ function App() {
       <div className="flex flex-1 relative h-[calc(100vh-64px)] overflow-hidden">
         {/* --- MAIN FEED --- */}
         <main
-          className={`overflow-y-auto bg-[#F1F0E8] px-4 md:px-5 lg:px-10 xl:px-14 py-12 flex-1 md:flex-none ${
+          className={`overflow-y-auto bg-[#F1F0E8] px-4 md:px-5 lg:px-10 xl:px-14 py-27 flex-1 md:flex-none ${
             isSidebarOpen ? "md:w-[calc(100%-260px)]" : "md:w-full"
           }`}
         >
