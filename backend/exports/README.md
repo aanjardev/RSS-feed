@@ -3,20 +3,25 @@
 Data export dari development untuk deployment ke production server.
 
 ## Files
-- `schema.sql` - Complete database schema (all tables structure)
-- `rss_sources_data.sql` - 18 Indonesian RSS sources with logos
-- `categories_data.sql` - 15 categories (5 default + 10 Indonesian)
-- `settings_data.sql` - 12 default settings
-- `import_all.sql` - Combined import script
+- `import_all_complete.sql` - **✅ USE THIS** - Schema + Data dalam 1 file
+- `schema.sql` - Complete database schema only (all tables structure)
+- `rss_sources_data.sql` - 26 RSS sources with logos (data only)
+- `categories_data.sql` - 15 categories (data only)
+- `settings_data.sql` - 12 default settings (data only)
+- `import_all.sql` - Data only (needs schema first)
 
 ## Cara Import di Server
 
-### Option 1: Import semua sekaligus
+### ✅ RECOMMENDED - Import Complete (Schema + Data)
 ```bash
-psql -U username -d database_name < import_all.sql
+# Local psql
+psql -U username -d database_name < import_all_complete.sql
+
+# Docker container
+docker exec -i container_name psql -U username -d database_name < import_all_complete.sql
 ```
 
-### Option 2: Import per file (lebih aman)
+### Option 2: Import per file (troubleshooting)
 ```bash
 # 1. Create schema first
 psql -U username -d database_name < schema.sql
@@ -25,11 +30,6 @@ psql -U username -d database_name < schema.sql
 psql -U username -d database_name < categories_data.sql
 psql -U username -d database_name < rss_sources_data.sql
 psql -U username -d database_name < settings_data.sql
-```
-
-### Option 3: Docker container (seperti di development)
-```bash
-docker exec -i container_name psql -U username -d database_name < import_all.sql
 ```
 
 ## Notes
