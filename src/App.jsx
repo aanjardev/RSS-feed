@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Menu, X, Search, Rss, ChevronLeft, ChevronRight } from "lucide-react";
 import { newsSources } from "./data";
 import fallbackLogo from "./assets/logo-fallback.svg";
@@ -11,17 +11,33 @@ function App() {
   );
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Fungsi untuk shuffle array
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   // Ambil berita untuk slider dari berbagai sumber
-  const sliderColors = [
+  const allSliderColors = [
     "bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-500",
     "bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500",
     "bg-gradient-to-br from-green-400 via-emerald-400 to-teal-500",
     "bg-gradient-to-br from-blue-400 via-cyan-400 to-sky-500",
     "bg-gradient-to-br from-violet-400 via-fuchsia-400 to-pink-500",
     "bg-gradient-to-br from-amber-400 via-lime-400 to-green-500",
+    "bg-gradient-to-br from-red-400 via-rose-400 to-pink-500",
+    "bg-gradient-to-br from-cyan-400 via-blue-400 to-indigo-500",
+    "bg-gradient-to-br from-lime-400 via-green-400 to-emerald-500",
+    "bg-gradient-to-br from-orange-400 via-amber-400 to-yellow-500",
+    "bg-gradient-to-br from-fuchsia-400 via-purple-400 to-violet-500",
+    "bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-500",
   ];
 
-  const cardColors = [
+  const allCardColors = [
     "bg-pink-100",
     "bg-yellow-100",
     "bg-green-100",
@@ -32,7 +48,21 @@ function App() {
     "bg-indigo-100",
     "bg-rose-100",
     "bg-lime-100",
+    "bg-cyan-100",
+    "bg-amber-100",
+    "bg-emerald-100",
+    "bg-sky-100",
+    "bg-violet-100",
+    "bg-fuchsia-100",
+    "bg-red-100",
+    "bg-slate-100",
+    "bg-stone-100",
+    "bg-zinc-100",
   ];
+
+  // Shuffle warna sekali saat component mount
+  const sliderColors = useMemo(() => shuffleArray(allSliderColors), []);
+  const cardColors = useMemo(() => shuffleArray(allCardColors), []);
 
   const featuredNews = newsSources.flatMap((source) =>
     source.news.slice(0, 2).map((news) => ({
