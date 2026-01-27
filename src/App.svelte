@@ -13,6 +13,35 @@
   let newsSources = $state([]);
   let isLoading = $state(true);
   let loadingMore = $state({});
+  let settings = $state({});
+
+  // Load public settings
+  async function loadSettings() {
+    try {
+      const response = await fetch('http://localhost:4000/api/settings/public');
+      if (response.ok) {
+        settings = await response.json();
+        
+        // Apply settings
+        if (settings.site_name) {
+          document.title = settings.site_name;
+        }
+        
+        if (settings.favicon_url) {
+          // Update favicon
+          let link = document.querySelector("link[rel~='icon']");
+          if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+          }
+          link.href = settings.favicon_url;
+        }
+      }
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  }
 
   // Fungsi untuk shuffle array
   function shuffleArray(array) {
@@ -218,6 +247,8 @@
 
   // Auto-slide
   onMount(() => {
+    loadSettings();
+    loadSettings();
     loadInitialArticles();
     
     const timer = setInterval(() => {

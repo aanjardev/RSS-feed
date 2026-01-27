@@ -3,6 +3,7 @@ import App from './App.svelte'
 import Admin from './AdminShadcn.svelte'
 import CategoryManagement from './CategoryManagement.svelte'
 import ArticleManagement from './ArticleManagement.svelte'
+import SettingsManagement from './SettingsManagement.svelte'
 import { mount } from 'svelte'
 
 // Simple client-side router
@@ -29,7 +30,8 @@ function router() {
   const routes = {
     '/': App,
     '/admin': Admin,
-    '/admin/categories': CategoryManagement
+    '/admin/categories': CategoryManagement,
+    '/admin/settings': SettingsManagement
   }
   
   const Component = routes[path] || App
