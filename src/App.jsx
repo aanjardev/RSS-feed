@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Menu, X, Search, Rss } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Search, Rss, ChevronLeft, ChevronRight } from "lucide-react";
 import { newsSources } from "./data";
 import fallbackLogo from "./assets/logo-fallback.svg";
 
@@ -9,6 +9,57 @@ function App() {
   const [visibleCount, setVisibleCount] = useState(() =>
     Object.fromEntries(newsSources.map((source) => [source.id, 5]))
   );
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Ambil berita untuk slider dari berbagai sumber
+  const sliderColors = [
+    "bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-500",
+    "bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500",
+    "bg-gradient-to-br from-green-400 via-emerald-400 to-teal-500",
+    "bg-gradient-to-br from-blue-400 via-cyan-400 to-sky-500",
+    "bg-gradient-to-br from-violet-400 via-fuchsia-400 to-pink-500",
+    "bg-gradient-to-br from-amber-400 via-lime-400 to-green-500",
+  ];
+
+  const cardColors = [
+    "bg-pink-100",
+    "bg-yellow-100",
+    "bg-green-100",
+    "bg-blue-100",
+    "bg-purple-100",
+    "bg-orange-100",
+    "bg-teal-100",
+    "bg-indigo-100",
+    "bg-rose-100",
+    "bg-lime-100",
+  ];
+
+  const featuredNews = newsSources.flatMap((source) =>
+    source.news.slice(0, 2).map((news) => ({
+      ...news,
+      sourceName: source.name,
+      sourceLogo: source.logo || fallbackLogo,
+    }))
+  ).slice(0, 6).map((news, idx) => ({
+    ...news,
+    bgColor: sliderColors[idx % sliderColors.length],
+  })); // Ambil 6 berita featured
+
+  // Auto-slide setiap 5 detik
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % featuredNews.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [featuredNews.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % featuredNews.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + featuredNews.length) % featuredNews.length);
+  };
 
   const filteredSources = newsSources.filter((source) =>
     source.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -106,8 +157,93 @@ function App() {
             isSidebarOpen ? "md:w-[calc(100%-280px)]" : "md:w-full"
           }`}
         >
+          {/* --- SLIDER / CAROUSEL --- */}
+          <div className="mx-auto w-full max-w-[1280px] mb-8">
+            <div className="relative rounded-2xl border-4 border-neutral overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-base-200">
+              {/* Slides */}
+              <div className="relative h-[300px] md:h-[400px]">
+                {featuredNews.map((news, idx) => (
+                  <div
+                    key={news.id}
+                    className={`absolute inset-0 transition-opacity duration-700 ${
+                      idx === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <div className="relative w-full h-full">
+                      {/* Colorful Background */}
+                      <div className={`absolute inset-0 ${news.bgColor}`} />
+                      
+                      {/* Background Image with Blend */}
+                      <img
+                        src={news.image}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60"
+                      />
+                      
+                      {/* Dark Gradient for Text */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                      
+                      {/* Content */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                        <div className="flex items-center gap-2 mb-3">
+                          <img
+                            src={news.sourceLogo}
+                            alt={news.sourceName}
+                            className="w-8 h-8 rounded-full border-2 border-white bg-white"
+                          />
+                          <span className="text-xs font-bold uppercase tracking-wide">
+                            {news.sourceName}
+                          </span>
+                          <span className="text-xs opacity-70">• {news.time}</span>
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-black leading-tight mb-2 drop-shadow-lg">
+                          {news.title}
+                        </h2>
+                        <p className="text-sm md:text-base opacity-90 line-clamp-2 max-w-3xl">
+                          {news.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 btn btn-circle btn-primary border-2 border-neutral shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] z-10"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 btn btn-circle btn-primary border-2 border-neutral shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] z-10"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={24} />
+              </button>
+
+              {/* Indicators */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {featuredNews.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`h-2 rounded-full border border-neutral transition-all ${
+                      idx === currentSlide
+                        ? "w-8 bg-primary"
+                        : "w-2 bg-white/50 hover:bg-white/80"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className="mx-auto w-full max-w-[1280px] grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
-            {newsSources.map((source) => {
+            {newsSources.map((source, sourceIdx) => {
               const shown = visibleCount[source.id] ?? 5;
               const canShowMore = shown < source.news.length;
               const logoUrl = source.logo || fallbackLogo;
@@ -141,12 +277,8 @@ function App() {
                     {source.news.slice(0, shown).map((item, idx) => (
                       <article
                         key={item.id}
-                        className={`group card card-compact border border-neutral bg-base-200 shadow-[var(--shadow-1)] neo-hover ${
-                          idx % 3 === 0
-                            ? "bg-primary/10"
-                            : idx % 3 === 1
-                            ? "bg-secondary/10"
-                            : "bg-accent/10"
+                        className={`group card card-compact border border-neutral shadow-[var(--shadow-1)] neo-hover ${
+                          cardColors[(idx + sourceIdx) % cardColors.length]
                         }`}
                       >
                         <div className="card-body gap-3 px-3 py-3">
