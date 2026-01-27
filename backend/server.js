@@ -6,6 +6,8 @@ import sourcesRouter from './routes/sources.js';
 import articlesRouter from './routes/articles.js';
 import loadMoreRouter from './routes/loadMore.js';
 import adminRouter from './routes/admin.js';
+import categoriesRouter from './routes/categories.js';
+import articleManagementRouter from './routes/articleManagement.js';
 import { startRSSFetcher } from './services/rssFetcher.js';
 
 dotenv.config();
@@ -36,6 +38,8 @@ app.use(express.json());
 app.use('/api/sources', sourcesRouter);
 app.use('/api/articles', articlesRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/article-management', articleManagementRouter);
 app.use('/load-more', loadMoreRouter);
 
 // Health check

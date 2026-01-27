@@ -9,11 +9,16 @@ router.get('/', async (req, res) => {
     const result = await pool.query(`
       SELECT 
         s.*,
+        c.name as category_name,
+        c.slug as category_slug,
+        c.icon as category_icon,
+        c.color as category_color,
         COUNT(a.id) as article_count,
         MAX(a.pub_date) as latest_article
       FROM rss_sources s
+      LEFT JOIN categories c ON s.category_id = c.id
       LEFT JOIN rss_articles a ON s.id = a.source_id
-      GROUP BY s.id
+      GROUP BY s.id, c.name, c.slug, c.icon, c.color
       ORDER BY s.name ASC
     `);
     

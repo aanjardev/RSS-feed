@@ -1,5 +1,7 @@
 <script>
   import { onMount } from 'svelte';
+  import { Dialog } from 'bits-ui';
+  import { cn } from '$lib/utils';
   
   const API_BASE = import.meta.env.PROD 
     ? (import.meta.env.VITE_API_URL || window.location.origin)
