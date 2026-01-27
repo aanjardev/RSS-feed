@@ -24,6 +24,19 @@
   --shadow-1: 4px 4px 0 #111;
 }
 
+/* Font optimization */
+@layer base {
+  body {
+    font-display: swap;
+  }
+}
+
+/* Prevent layout shift for images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .neo-hover {
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
