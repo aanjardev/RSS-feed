@@ -5,6 +5,7 @@ import cron from 'node-cron';
 import sourcesRouter from './routes/sources.js';
 import articlesRouter from './routes/articles.js';
 import loadMoreRouter from './routes/loadMore.js';
+import adminRouter from './routes/admin.js';
 import { startRSSFetcher } from './services/rssFetcher.js';
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(express.json());
 // Routes
 app.use('/api/sources', sourcesRouter);
 app.use('/api/articles', articlesRouter);
+app.use('/api/admin', adminRouter);
 app.use('/load-more', loadMoreRouter);
 
 // Health check

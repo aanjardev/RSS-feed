@@ -245,11 +245,11 @@
 <div class="min-h-screen {bodyBgColor} text-neutral overflow-hidden flex flex-col">
   <!-- NAVBAR -->
   <nav
-    class="navbar px-6 border-b-4 border-neutral shadow-[var(--shadow-1)] fixed top-0 left-0 right-0 z-50 {bodyBgColor}"
+    class="navbar px-6 border-b-2 border-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.08)] fixed top-0 left-0 right-0 z-50 {bodyBgColor}"
   >
     <div class="navbar-start flex items-center gap-3">
       <div
-        class="btn btn-square btn-primary border-2 border-neutral shadow-[var(--shadow-1)]"
+        class="btn btn-square btn-primary border-2 border-black/20 shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +273,27 @@
       </div>
     </div>
 
-    <div class="navbar-end">
+    <div class="navbar-end gap-2">
+      <a 
+        href="/admin"
+        class="btn btn-sm btn-ghost"
+        title="Admin Dashboard"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </a>
       <button
         onclick={() => (isSidebarOpen = !isSidebarOpen)}
         class="btn btn-square btn-ghost border-2 border-neutral neo-hover"
@@ -317,7 +337,7 @@
         <!-- SLIDER / CAROUSEL -->
         <div class="mx-auto w-full max-w-[1280px] mb-8">
           <div
-            class="relative rounded-2xl border-4 border-neutral overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-base-200"
+            class="relative rounded-2xl border-2 border-black/15 overflow-hidden shadow-[4px_4px_0_rgba(0,0,0,0.1)] bg-base-200"
           >
             <!-- Slides -->
             <div class="relative h-[300px] md:h-[400px]">
@@ -449,11 +469,11 @@
           {@const logoUrl = source.logo || fallbackLogo}
           <div
             id="source-{source.id}"
-            class="card card-bordered border-2 border-neutral bg-base-200 h-full min-h-0 shadow-[var(--shadow-1)]"
+            class="card card-bordered border-2 border-black/15 bg-base-200 h-full min-h-0 shadow-[2px_2px_0_rgba(0,0,0,0.08)]"
           >
             <!-- Header -->
             <div
-              class="px-3 py-3 sticky top-0 bg-base-200 border-b-2 border-neutral"
+              class="px-3 py-3 sticky top-0 bg-base-200 border-b border-black/15"
             >
               <div class="flex items-center gap-2">
                 <img
@@ -474,15 +494,15 @@
             </div>
 
             <!-- List Berita -->
-            <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4 bg-base-100">
+            <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4 bg-base-200">
               {#each source.news.slice(0, shown) as item, idx}
                 <a
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group card card-compact border border-neutral shadow-[var(--shadow-1)] neo-hover {cardColors[
+                  class="group card card-compact border border-black/15 shadow-[1px_1px_0_rgba(0,0,0,0.08)] neo-hover {cardColors[
                     (idx + sourceIdx) % cardColors.length
-                  ]} block no-underline hover:border-2"
+                  ]} block no-underline hover:border-black/25 hover:shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
                 >
                   <div class="card-body gap-3 px-3 py-3">
                     <h3 class="font-bold text-base leading-tight group-hover:text-primary transition-colors">
