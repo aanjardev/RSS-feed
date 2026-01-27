@@ -7,8 +7,8 @@
   let searchQuery = $state("");
   let visibleCount = $state({});
   let currentSlide = $state(0);
-  let sliderColors = [];
-  let cardColors = [];
+  let sliderColors = $state([]);
+  let cardColors = $state([]);
   let featuredNews = $state([]);
   let newsSources = $state([]);
   let isLoading = $state(true);
@@ -80,7 +80,7 @@
   // Initialize colors on mount
   sliderColors = shuffleArray(allSliderColors);
   cardColors = shuffleArray(allCardColors);
-  let bodyBgColor = allBodyBackgrounds[Math.floor(Math.random() * allBodyBackgrounds.length)];
+  let bodyBgColor = $state(allBodyBackgrounds[Math.floor(Math.random() * allBodyBackgrounds.length)]);
   $effect(() => {
     bodyBgColor = allBodyBackgrounds[Math.floor(Math.random() * allBodyBackgrounds.length)];
   });
@@ -330,7 +330,7 @@
                 >
                   <div class="relative w-full h-full">
                     <!-- Colorful Background -->
-                    <div class="absolute inset-0 {news.bgColor}" />
+                    <div class="absolute inset-0 {news.bgColor}"></div>
 
                     <!-- Background Image with Blend -->
                     <img
@@ -346,7 +346,7 @@
                     <!-- Dark Gradient for Text -->
                     <div
                       class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"
-                    />
+                    ></div>
 
                     <!-- Content -->
                     <div
@@ -435,7 +435,7 @@
                   ? 'w-8 bg-primary'
                   : 'w-2 bg-white/50 hover:bg-white/80'}"
                 aria-label="Go to slide {idx + 1}"
-              />
+              ></button>
             {/each}
           </div>
         </div>
@@ -723,7 +723,7 @@
         onkeydown={(e) => e.key === "Escape" && (isSidebarOpen = false)}
         role="button"
         tabindex="0"
-      />
+      ></div>
     {/if}
   </div>
 </div>

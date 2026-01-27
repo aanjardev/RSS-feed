@@ -3,140 +3,140 @@
     "id": "tempo-bisnis",
     "name": "Tempo Bisnis",
     "url": "https://rss.tempo.co/bisnis",
-    "logo": "http://www.tilikfeed.com/logos/icons/tempo.png",
+    "logo": "/assets/logos/tempo-bisnis.png",
     "description": "Tempo.co Berita Bisnis Terkini Indonesia dan Dunia RSS"
   },
   {
     "id": "liputan-6",
     "name": "Liputan 6",
     "url": "https://feed.liputan6.com/rss/news",
-    "logo": "http://www.tilikfeed.com/logos/icons/liputan6.jpeg",
+    "logo": "/assets/logos/liputan-6.jpeg",
     "description": "Liputan6.com Politik"
   },
   {
     "id": "tribunnews",
     "name": "Tribunnews",
     "url": "https://www.tribunnews.com/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/tribunnews.png",
+    "logo": "/assets/logos/tribunnews.png",
     "description": "Tribunnews.com"
   },
   {
     "id": "cnbc-market",
     "name": "CNBC Market",
     "url": "https://www.cnbcindonesia.com/market/rss/",
-    "logo": "http://www.tilikfeed.com/logos/icons/CNBC_Indonesia.png",
+    "logo": "/assets/logos/cnbc-market.png",
     "description": "Market - Berita Terkini Market, Saham, Reksadana - CNBC Indonesia"
   },
   {
     "id": "tempo-nasional",
     "name": "Tempo Nasional",
     "url": "https://rss.tempo.co/nasional",
-    "logo": "http://www.tilikfeed.com/logos/icons/tempo.png",
+    "logo": "/assets/logos/tempo-nasional.png",
     "description": "Tempo.co Berita Nasional Terbaru Indonesia Hari Ini RSS"
   },
   {
     "id": "republika",
     "name": "Republika",
     "url": "https://www.republika.co.id/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/republika.png",
+    "logo": "/assets/logos/republika.png",
     "description": "Republika Online RSS Feed"
   },
   {
     "id": "kompas",
     "name": "Kompas",
     "url": "#",
-    "logo": "http://www.tilikfeed.com/logos/icons/kompas2.png",
+    "logo": "/assets/logos/kompas.png",
     "description": "No Title"
   },
   {
     "id": "okezone",
     "name": "Okezone",
     "url": "https://sindikasi.okezone.com/index.php/rss/0/RSS2.0",
-    "logo": "http://www.tilikfeed.com/logos/icons/okezone.png",
+    "logo": "/assets/logos/okezone.png",
     "description": "Sindikasi economy.okezone.com"
   },
   {
     "id": "tirto",
     "name": "Tirto",
     "url": "https://tirto.id/sitemap/r/google-discover",
-    "logo": "http://www.tilikfeed.com/logos/icons/tirto.png",
+    "logo": "/assets/logos/tirto.png",
     "description": "tirto.id"
   },
   {
     "id": "detik-news",
     "name": "Detik News",
     "url": "https://news.detik.com/berita/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/detik.png",
+    "logo": "/assets/logos/detik-news.png",
     "description": "Berita - Detikcom"
   },
   {
     "id": "detik-finance",
     "name": "Detik Finance",
     "url": "https://finance.detik.com/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/detik.png",
+    "logo": "/assets/logos/detik-finance.png",
     "description": "Finance - Detikcom"
   },
   {
     "id": "viva",
     "name": "Viva",
     "url": "https://www.viva.co.id/get/all",
-    "logo": "http://www.tilikfeed.com/logos/icons/viva1.png",
+    "logo": "/assets/logos/viva.png",
     "description": "VIVA - Berita Harian Terkini, Terpopuler, Terbaru"
   },
   {
     "id": "kumparan",
     "name": "Kumparan",
     "url": "https://lapi.kumparan.com/v2.0/rss/",
-    "logo": "http://www.tilikfeed.com/logos/icons/kumparan2.png",
+    "logo": "/assets/logos/kumparan.png",
     "description": "kumparan - #kumparanAdalahJawaban"
   },
   {
     "id": "suara-pembaharuan",
     "name": "Suara Pembaharuan",
     "url": "https://www.suarapembaharuan.com/feeds/posts/default",
-    "logo": "http://www.tilikfeed.com/logos/icons/suara-pembaharuan.png",
+    "logo": "/assets/logos/suara-pembaharuan.png",
     "description": "Suara Pembaharuan"
   },
   {
     "id": "sindonews",
     "name": "SindoNews",
     "url": "https://www.sindonews.com/feed",
-    "logo": "http://www.tilikfeed.com/logos/icons/sindonews1.png",
+    "logo": "/assets/logos/sindonews.png",
     "description": "Berita Terkini dan Informasi Terbaru Hari Ini - SINDOnews"
   },
   {
     "id": "cnbc-news",
     "name": "CNBC News",
     "url": "https://www.cnbcindonesia.com/news/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/CNBC_Indonesia.png",
+    "logo": "/assets/logos/cnbc-news.png",
     "description": "News - Berita Terkini Indonesia dan Dunia - CNBC Indonesia"
   },
   {
     "id": "cnn-nasional",
     "name": "CNN Nasional",
     "url": "https://www.cnnindonesia.com/nasional/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/CNN_Indonesia.png",
+    "logo": "/assets/logos/cnn-nasional.png",
     "description": "CNN Indonesia | Berita Terkini Nasional"
   },
   {
     "id": "media-indonesia",
     "name": "Media Indonesia",
     "url": "#",
-    "logo": "http://www.tilikfeed.com/logos/icons/media-indonesia.png",
+    "logo": "/assets/logos/media-indonesia.png",
     "description": "No Title"
   },
   {
     "id": "cnn-ekonomi",
     "name": "CNN Ekonomi",
     "url": "https://www.cnnindonesia.com/ekonomi/rss",
-    "logo": "http://www.tilikfeed.com/logos/icons/CNN_Indonesia.png",
+    "logo": "/assets/logos/cnn-ekonomi.png",
     "description": "CNN Indonesia | Berita Terkini Ekonomi"
   },
   {
     "id": "antara",
     "name": "Antara",
     "url": "https://www.antaranews.com/rss/top-news",
-    "logo": "http://www.tilikfeed.com/logos/icons/antaranews2.png",
+    "logo": "/assets/logos/antara.png",
     "description": "Berita Top News - ANTARA News"
   }
 ]
