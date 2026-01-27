@@ -349,10 +349,7 @@
                     : 'opacity-0'}"
                 >
                   <div class="relative w-full h-full">
-                    <!-- Colorful Background -->
-                    <div class="absolute inset-0 {news.bgColor}"></div>
-
-                    <!-- Background Image with Blend -->
+                    <!-- Background Image -->
                     <img
                       src={news.image}
                       alt="{news.title}"
@@ -360,7 +357,7 @@
                       fetchpriority="{idx === 0 ? 'high' : 'auto'}"
                       width="1280"
                       height="400"
-                      class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60"
+                      class="absolute inset-0 w-full h-full object-cover"
                     />
 
                     <!-- Dark Gradient for Text -->

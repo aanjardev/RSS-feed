@@ -17,7 +17,17 @@ INSERT INTO categories (name, slug, description, icon, color) VALUES
 ('Business', 'business', 'Business and economy news', '💼', '#10b981'),
 ('Technology', 'technology', 'Tech and innovation news', '💻', '#8b5cf6'),
 ('Sports', 'sports', 'Sports and athletics news', '⚽', '#f59e0b'),
-('Entertainment', 'entertainment', 'Entertainment and lifestyle', '🎬', '#ec4899')
+('Entertainment', 'entertainment', 'Entertainment and lifestyle', '🎬', '#ec4899'),
+('Lokal', 'lokal', 'Berita lokal dan daerah', '🏘️', '#06b6d4'),
+('Nasional', 'nasional', 'Berita nasional Indonesia', '🇮🇩', '#ef4444'),
+('Internasional', 'internasional', 'Berita internasional dan dunia', '🌍', '#8b5cf6'),
+('Olahraga', 'olahraga', 'Berita olahraga dan kompetisi', '⚽', '#f59e0b'),
+('Hukum', 'hukum', 'Berita hukum dan peradilan', '⚖️', '#64748b'),
+('Politik', 'politik', 'Berita politik dan pemerintahan', '🏛️', '#7c3aed'),
+('Otonomi Khusus', 'otonomi-khusus', 'Berita otonomi khusus daerah', '🏞️', '#84cc16'),
+('Kesehatan', 'kesehatan', 'Berita kesehatan dan medis', '🏥', '#10b981'),
+('Opini', 'opini', 'Opini dan editorial', '💭', '#f97316'),
+('Artikel', 'artikel', 'Artikel dan feature', '📝', '#06b6d4')
 ON CONFLICT (slug) DO NOTHING;
 
 -- Add foreign key to rss_sources if not exists
