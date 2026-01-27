@@ -197,9 +197,9 @@
           <div class="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
             <div class="flex items-start justify-between">
               <div class="flex-1">
-                <label class="block text-sm font-semibold text-gray-900 mb-1">
+                <div class="block text-sm font-semibold text-gray-900 mb-1">
                   {setting.label}
-                </label>
+                </div>
                 {#if setting.description}
                   <p class="text-sm text-gray-500 mb-3">{setting.description}</p>
                 {/if}
@@ -222,7 +222,7 @@
                         "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
                         setting.value === 'true' ? 'translate-x-6' : 'translate-x-1'
                       )}
-                    />
+                    ></span>
                   </button>
                   <span class="ml-3 text-sm text-gray-600">
                     {setting.value === 'true' ? 'Enabled' : 'Disabled'}
