@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:4000';
+// Auto-detect environment
+const API_BASE_URL = import.meta.env.PROD 
+  ? (import.meta.env.VITE_API_URL || window.location.origin)
+  : 'http://localhost:4000';
 
 // Fetch articles from backend API (not direct RSS)
 export async function fetchArticlesBySource(sourceId, limit = 10, offset = 0) {
