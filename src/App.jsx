@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Search, Rss } from "lucide-react";
 import { newsSources } from "./data";
+import fallbackLogo from "./assets/logo-fallback.svg";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -9,7 +10,6 @@ function App() {
     Object.fromEntries(newsSources.map((source) => [source.id, 5]))
   );
 
-  
   const filteredSources = newsSources.filter((source) =>
     source.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -23,147 +23,167 @@ function App() {
   };
 
   const SidebarContent = ({ showClose = false }) => (
-    <div className="py-6 pl-4 pr-0 flex flex-col h-full w-full">
-      <div className="flex justify-between items-center mb-5 border-b pb-3 pr-4">
-        <span className="font-bold text-gray-800 tracking-tight uppercase text-sm">
+    <div className="py-6 px-4 flex flex-col h-full w-full gap-4">
+      <div className="flex justify-between items-center border-b-4 border-neutral pb-3">
+        <span className="font-black tracking-tight uppercase text-sm">
           RSS Feed Sources
         </span>
         {showClose && (
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
+            className="btn btn-sm btn-square btn-ghost border-2 border-neutral neo-hover"
+            aria-label="Close sidebar"
           >
-            <X size={24} />
+            <X size={18} />
           </button>
         )}
       </div>
 
-      <div className="relative mb-5 pr-4">
-        <Search
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-          size={16}
-        />
+      <label className="input input-bordered input-lg flex items-center gap-2 shadow-[var(--shadow-1)] bg-base-200 border-2 border-neutral">
+        <Search size={16} />
         <input
           type="text"
+          className="grow text-sm placeholder:text-xs"
           placeholder="Cari sumber berita..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FAB005]/30 transition-all"
         />
-      </div>
+      </label>
 
-      <div className="flex-1 overflow-y-auto space-y-1 pr-2">
+      <ul className="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-200px)] overflow-y-auto">
         {filteredSources.map((source) => (
-          <button
-            key={source.id}
-            className="w-full text-left px-4 py-3 text-[14px] text-gray-600 hover:bg-[#FDFCF0] hover:text-[#FAB005] rounded-xl transition-all font-semibold flex items-center justify-between group"
-          >
-            {source.name}
-            <span className="opacity-0 group-hover:opacity-100 transition-all transform -translate-x-2 group-hover:translate-x-0 font-bold">
-              →
-            </span>
-          </button>
+          <li key={source.id}>
+            <button className="w-full justify-between font-semibold px-3 py-2 rounded-lg hover:bg-base-200 hover:border hover:border-neutral hover:shadow-[4px_4px_0_#111]">
+              {source.name}
+              <span className="text-xs font-black tracking-tight opacity-60 group-hover:opacity-100">
+                ›
+              </span>
+            </button>
+          </li>
         ))}
         {filteredSources.length === 0 && (
-          <p className="text-center text-gray-400 text-xs mt-10 italic">
+          <li className="text-center text-sm italic text-neutral/60">
             Sumber "{searchQuery}" tidak ditemukan
-          </p>
+          </li>
         )}
-      </div>
+      </ul>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#FDFCF0] font-sans text-[#333] overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-base-100 text-neutral overflow-hidden flex flex-col">
       {/* --- NAVBAR --- */}
-      <nav className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 fixed top-0 left-0 right-0 z-50 shadow-sm">
-        <div className="flex items-center gap-2">
-          <div className="bg-[#FAB005] p-1.5 rounded-lg shadow-sm">
-            <Rss size={23} className="text-white" />
+      <nav className="navbar px-6 border-b-4 border-neutral shadow-[var(--shadow-1)] fixed top-0 left-0 right-0 z-50 bg-base-100">
+        <div className="navbar-start flex items-center gap-3">
+          <div className="btn btn-square btn-primary border-2 border-neutral shadow-[var(--shadow-1)]">
+            <Rss size={20} />
           </div>
-          <h1 className="text-2xl font-black italic tracking-tighter text-[#444]">
-            Tilik <span className="text-[#666]">Feed</span>
-          </h1>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em]">
+              Tilik
+            </p>
+            <h1 className="text-2xl font-black leading-tight tracking-tight">
+              Feed
+            </h1>
+          </div>
         </div>
 
-        <button
-          onClick={() => setIsSidebarOpen((prev) => !prev)}
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          aria-label="Toggle sidebar"
-        >
-          <Menu size={28} />
-        </button>
+        <div className="navbar-end">
+          <button
+            onClick={() => setIsSidebarOpen((prev) => !prev)}
+            className="btn btn-square btn-ghost border-2 border-neutral neo-hover"
+            aria-label="Toggle sidebar"
+          >
+            <Menu size={24} />
+          </button>
+        </div>
       </nav>
 
-      <div className="flex flex-1 relative h-[calc(100vh-64px)] overflow-hidden">
+      <div className="flex flex-1 relative overflow-hidden pt-20">
         {/* --- MAIN FEED --- */}
         <main
-          className={`overflow-y-auto bg-[#F1F0E8] px-4 md:px-5 lg:px-10 xl:px-14 py-27 flex-1 md:flex-none ${
-            isSidebarOpen ? "md:w-[calc(100%-260px)]" : "md:w-full"
+          className={`overflow-y-auto px-4 md:px-8 lg:px-12 xl:px-16 py-8 flex-1 md:flex-none ${
+            isSidebarOpen ? "md:w-[calc(100%-280px)]" : "md:w-full"
           }`}
         >
-          <div className="mx-auto w-full max-w-full md:max-w-full lg:max-w-[1360px] grid gap-y-3 gap-x-3 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-5">
+          <div className="mx-auto w-full max-w-[1280px] grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
             {newsSources.map((source) => {
               const shown = visibleCount[source.id] ?? 5;
               const canShowMore = shown < source.news.length;
+              const logoUrl = source.logo || fallbackLogo;
               return (
                 <div
                   key={source.id}
-                  className="w-full bg-[#EAE8DC] rounded-md flex flex-col h-full border border-black/5 shadow-sm"
+                  className="card card-bordered border-2 border-neutral bg-base-200 h-full min-h-0 shadow-[var(--shadow-1)]"
                 >
                   {/* Header */}
-                  <div className="p-4 bg-[#e3e0cf] rounded-t-xl sticky top-0 z-10 border-b border-black/5">
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-6 h-6 bg-black rounded flex items-center justify-center text-[10px] text-white font-bold uppercase">
-                        {source.name.substring(0, 2)}
+                  <div className="px-3 py-3 sticky top-0 bg-base-200 border-b-2 border-neutral">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={logoUrl}
+                        alt={source.name}
+                        className="w-12 h-12 object-cover"
+                        loading="lazy"
+                      />
+                      <div className="min-w-0">
+                        <h2 className="card-title leading-tight text-base">
+                          {source.name}
+                        </h2>
+                        <p className="text-xs opacity-70 truncate mt-1">
+                          {source.sub}
+                        </p>
                       </div>
-                      <h2 className="font-bold text-lg leading-none tracking-tight">
-                        {source.name}
-                      </h2>
                     </div>
-                    <p className="text-[12px] text-gray-500 truncate">
-                      {source.sub}
-                    </p>
                   </div>
 
                   {/* List Berita */}
-                  <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4 custom-scrollbar bg-[#F1F0E8]">
-                    {source.news.slice(0, shown).map((item) => (
-                      <div
+                  <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4 bg-base-100">
+                    {source.news.slice(0, shown).map((item, idx) => (
+                      <article
                         key={item.id}
-                        className={`group cursor-pointer rounded-md overflow-hidden shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-black/5 ${item.color}`}
+                        className={`group card card-compact border border-neutral bg-base-200 shadow-[var(--shadow-1)] neo-hover ${
+                          idx % 3 === 0
+                            ? "bg-primary/10"
+                            : idx % 3 === 1
+                            ? "bg-secondary/10"
+                            : "bg-accent/10"
+                        }`}
                       >
-                        <div className="p-2">
-                          <h3 className="text-[16px] font-semibold leading-tight mb-3 tracking-tight text-[#222]">
+                        <div className="card-body gap-3 px-3 py-3">
+                          <h3 className="font-bold text-base leading-tight">
                             {item.title}
                           </h3>
 
                           {item.image && (
-                            <img
-                              src={item.image}
-                              alt=""
-                              className="w-full aspect-video object-cover rounded-sm mb-3 shadow-inner"
-                            />
+                            <figure className="rounded-lg overflow-hidden border border-neutral shadow-inner">
+                              <img
+                                src={item.image}
+                                alt=""
+                                className="w-full aspect-video object-cover"
+                              />
+                            </figure>
                           )}
 
-                          <p className="text-[14px] text-gray-600 leading-snug mb-3 line-clamp-2">
+                          <p className="text-sm leading-snug opacity-80 line-clamp-2">
                             {item.desc}
                           </p>
 
-                          <div className="flex justify-between items-center text-[12px] text-gray-500 italic font-normal pt-2">
-                            <span>{item.time}</span>
+                          <div className="flex justify-between items-center text-xs font-semibold">
+                            <span className="uppercase tracking-tight opacity-70">
+                              {item.time}
+                            </span>
                             <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                              Read Full →
+                              Read →
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </article>
                     ))}
                   </div>
 
-                  <div className="p-3 bg-[#F1F0E8] rounded-b-xl">
+                  <div className="p-4 bg-base-200 border-t-2 border-neutral">
                     <button
-                      className="w-full py-2.5 bg-white/70 hover:bg-white text-[12px] font-bold text-gray-600 rounded-lg transition-colors border border-black/5 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="btn btn-primary btn-block border-2 border-neutral shadow-[var(--shadow-1)] neo-hover"
                       onClick={() => handleShowMore(source.id, source.news.length)}
                       disabled={!canShowMore}
                     >
@@ -176,21 +196,25 @@ function App() {
           </div>
         </main>
 
+        {/* Desktop sidebar */}
         <aside
-          className={`${isSidebarOpen ? "hidden md:flex" : "hidden"} fixed top-16 right-0 h-[calc(100vh-64px)] w-[260px] bg-white border-l border-gray-100 shadow-inner overflow-y-auto`}
+          className={`${isSidebarOpen ? "hidden md:flex" : "hidden"} fixed top-16 right-0 min-h-[calc(100vh-64px)] max-h-[calc(100vh-64px)] w-[280px] bg-base-100 border-l-4 border-neutral shadow-[var(--shadow-1)] overflow-hidden`}
         >
           <SidebarContent />
         </aside>
 
+        {/* Mobile drawer */}
         <aside
-          className={`md:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-[60] transform transition-transform duration-300 ease-in-out border-l border-gray-100 ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
+          className={`md:hidden fixed top-0 right-0 h-full w-[260px] bg-base-100 shadow-[var(--shadow-1)] z-[60] transform transition-transform duration-300 ease-in-out border-l-4 border-neutral ${
+            isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         >
           <SidebarContent showClose />
         </aside>
 
         {isSidebarOpen && (
           <div
-            className="md:hidden fixed inset-0 bg-black/10 backdrop-blur-[1px] z-[55]"
+            className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-[1px] z-[55]"
             onClick={() => setIsSidebarOpen(false)}
           />
         )}

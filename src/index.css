@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@plugin "daisyui" {
+  /* make neobrutal the default light theme; keep dark as prefers-color-scheme fallback */
+  themes: "neobrutal" --default, "dark" --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+  name: "neobrutal";
+  default: true;
+  color-scheme: light;
+  --color-primary: #ff5c8d;
+  --color-secondary: #5d5fef;
+  --color-accent: #00c2a8;
+  --color-neutral: #171717;
+  --color-base-100: #fefefe;
+  --color-info: #3abff8;
+  --color-success: #22c55e;
+  --color-warning: #facc15;
+  --color-error: #f43f5e;
+  --radius-box: 12px;
+  --radius-btn: 10px;
+  --border-btn: 3px;
+  --shadow-1: 4px 4px 0 #111;
+}
+
+.neo-hover {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.neo-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-1);
+}
