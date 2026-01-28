@@ -171,8 +171,14 @@
           <a href="/admin/categories" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
             Categories
           </a>
+          <a href="/admin/custom-articles" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+            Articles
+          </a>
           <a href="/admin/settings" class="px-3 py-2 text-sm font-medium text-gray-900 bg-gray-100 rounded-md">
             Settings
+          </a>
+          <a href="/admin/users" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+            Users
           </a>
         </nav>
       </div>
