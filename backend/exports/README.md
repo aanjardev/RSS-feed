@@ -1,35 +1,47 @@
-# Database Export
+# Database Export & Restore
 
 Data export dari development untuk deployment ke production server.
 
 ## Files
-- `import_all_complete.sql` - **✅ USE THIS** - Schema + Data dalam 1 file
-- `schema.sql` - Complete database schema only (all tables structure)
-- `rss_sources_data.sql` - 26 RSS sources with logos (data only)
-- `categories_data.sql` - 15 categories (data only)
-- `settings_data.sql` - 12 default settings (data only)
-- `import_all.sql` - Data only (needs schema first)
+- **`full_backup.sql`** - ✅ **COMPLETE BACKUP** - Schema + ALL data (2.2MB, includes all articles)
+- **`restore_database.sh`** - 🔧 **AUTO RESTORE SCRIPT** - Delete & import otomatis
+- `import_all_complete.sql` - Schema + master data only (tanpa articles)
+- `schema.sql` - Database schema only
+- `rss_sources_data.sql` - RSS sources data only
+- `categories_data.sql` - Categories data only
+- `settings_data.sql` - Settings data only
 
 ## Cara Import di Server
 
-### ✅ RECOMMENDED - Import Complete (Schema + Data)
-```bash
-# Local psql
-psql -U username -d database_name < import_all_complete.sql
+### ✅ RECOMMENDED - Auto Restore (Paling Mudah!)
+Script ini akan otomatis delete & restore database:
 
-# Docker container
-docker exec -i container_name psql -U username -d database_name < import_all_complete.sql
+```bash
+cd ~/RSS-feed/backend/exports
+chmod +x restore_database.sh
+./restore_database.sh
 ```
 
-### Option 2: Import per file (troubleshooting)
-```bash
-# 1. Create schema first
-psql -U username -d database_name < schema.sql
+Script akan:
+- ✓ Drop semua tables existing
+- ✓ Import full backup (schema + data + articles)
+- ✓ Verify data counts
+- ✓ Auto-detect Docker atau system PostgreSQL
 
-# 2. Import data
-psql -U username -d database_name < categories_data.sql
-psql -U username -d database_name < rss_sources_data.sql
-psql -U username -d database_name < settings_data.sql
+### Manual Import (Alternative)
+
+**Option 1 - Full Backup (termasuk articles):**
+```bash
+# Docker PostgreSQL
+docker exec -i container_name psql -U username -d postgres < full_backup.sql
+
+# System PostgreSQL
+psql -U username -d postgres < full_backup.sql
+```
+
+**Option 2 - Master Data Only (tanpa articles):**
+```bash
+psql -U username -d postgres < import_all_complete.sql
 ```
 
 ## Notes
