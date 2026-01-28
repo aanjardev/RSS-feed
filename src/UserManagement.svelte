@@ -292,6 +292,7 @@
                     )}
                     role="switch"
                     aria-checked={user.is_active}
+                    aria-label="Toggle user active status"
                   >
                     <span class={cn(
                       "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
@@ -335,8 +336,9 @@
         
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label for="user-name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <input
+              id="user-name"
               type="text"
               bind:value={formData.name}
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -345,8 +347,9 @@
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label for="user-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
+              id="user-email"
               type="email"
               bind:value={formData.email}
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -355,10 +358,11 @@
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="user-password" class="block text-sm font-medium text-gray-700 mb-1">
               Password {modalMode === 'edit' ? '(leave blank to keep current)' : ''}
             </label>
             <input
+              id="user-password"
               type="password"
               bind:value={formData.password}
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -367,8 +371,9 @@
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+            <label for="user-role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
             <select
+              id="user-role"
               bind:value={formData.role}
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
