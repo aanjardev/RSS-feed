@@ -5,8 +5,7 @@ import Admin from './AdminShadcn.svelte'
 import CategoryManagement from './CategoryManagement.svelte'
 import ArticleManagement from './ArticleManagement.svelte'
 import SettingsManagement from './SettingsManagement.svelte'
-import UserManagement from './UserManagement.svelte'
-import { mount } from 'svelte'
+import UserManagement from './UserManagement.svelte'import CustomArticlesManagement from './CustomArticlesManagement.svelte';import { mount } from 'svelte'
 
 // Simple client-side router
 function router() {
@@ -34,6 +33,7 @@ function router() {
     '/admin': Login,
     '/admin/dashboard': Admin,
     '/admin/categories': CategoryManagement,
+    '/admin/custom-articles': CustomArticlesManagement,
     '/admin/settings': SettingsManagement,
     '/admin/users': UserManagement
   }

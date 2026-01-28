@@ -27,6 +27,7 @@ MIGRATIONS=(
     "003_add_settings.sql"
     "004_add_users.sql"
     "005_add_logo_settings.sql"
+    "006_add_custom_articles.sql"
 )
 
 # Get the directory where this script is located
