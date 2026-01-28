@@ -18,7 +18,11 @@
   // Load public settings
   async function loadSettings() {
     try {
-      const response = await fetch('http://localhost:4000/api/settings/public');
+      const API_BASE = import.meta.env.PROD
+        ? (import.meta.env.VITE_API_URL || window.location.origin)
+        : 'http://localhost:4000';
+      
+      const response = await fetch(`${API_BASE}/api/settings/public`);
       if (response.ok) {
         settings = await response.json();
         

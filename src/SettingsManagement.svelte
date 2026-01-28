@@ -2,7 +2,10 @@
   import { onMount } from 'svelte';
   import { cn } from './lib/utils';
   
-  const API_BASE = 'http://localhost:4000/api';
+  const API_BASE = import.meta.env.PROD
+    ? (import.meta.env.VITE_API_URL || window.location.origin)
+    : 'http://localhost:4000';
+  const API_URL = `${API_BASE}/api`;
   
   let settings = $state([]);
   let loading = $state(true);
@@ -26,7 +29,7 @@
   async function fetchSettings() {
     loading = true;
     try {
-      const response = await fetch(`${API_BASE}/settings`);
+      const response = await fetch(`${API_URL}/settings`);
       if (!response.ok) throw new Error('Failed to fetch settings');
       settings = await response.json();
     } catch (error) {
@@ -40,7 +43,7 @@
   async function updateSetting(key, value) {
     saving = true;
     try {
-      const response = await fetch(`${API_BASE}/settings/${key}`, {
+      const response = await fetch(`${API_URL}/settings/${key}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ value: String(value) })
@@ -69,7 +72,7 @@
       formData.append('file', file);
       formData.append('key', key);
       
-      const response = await fetch(`${API_BASE}/settings/upload`, {
+      const response = await fetch(`${API_URL}/settings/upload`, {
         method: 'POST',
         body: formData
       });
