@@ -316,10 +316,10 @@
           </svg>
         </div>
       {/if}
-      <div>
+      <!-- <div>
         <p class="text-xs font-semibold uppercase tracking-[0.2em]">{settings.site_name || 'Tilik'}</p>
         <h1 class="text-2xl font-black leading-tight tracking-tight">{settings.site_tagline || 'Feed'}</h1>
-      </div>
+      </div> -->
     </div>
 
     <div class="navbar-end gap-2">
