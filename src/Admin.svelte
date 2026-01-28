@@ -16,7 +16,7 @@
   
   let formData = $state({
     name: '',
-    url: '',
+    url: '',x.papua.news
     logo: '',
     description: '',
     category: 'News',
