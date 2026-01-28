@@ -7,6 +7,37 @@
     : 'http://localhost:4000';
   const API_URL = `${API_BASE}/api`;
   
+  // Auth check with JWT verification
+  onMount(async () => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      window.location.href = '/admin';
+      return;
+    }
+    
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      
+      if (!response.ok) {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_user');
+        window.location.href = '/admin';
+      }
+    } catch (error) {
+      window.location.href = '/admin';
+    }
+  });
+  
+  function handleLogout() {
+    localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
+    window.location.href = '/';
+  }
+  
   let settings = $state([]);
   let loading = $state(true);
   let saving = $state(false);
@@ -134,7 +165,7 @@
       <div class="flex items-center space-x-8">
         <h1 class="text-xl font-bold text-gray-900">Admin Dashboard</h1>
         <nav class="flex space-x-4">
-          <a href="/admin" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+          <a href="/admin/dashboard" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
             RSS Sources
           </a>
           <a href="/admin/categories" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
@@ -145,9 +176,17 @@
           </a>
         </nav>
       </div>
-      <a href="/" class="text-sm font-medium text-blue-600 hover:text-blue-700">
-        ← Back to Feed
-      </a>
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-sm font-medium text-blue-600 hover:text-blue-700">
+          ← Home
+        </a>
+        <button
+          onclick={handleLogout}
+          class="text-sm font-medium text-red-600 hover:text-red-700 px-3 py-2 rounded-md hover:bg-red-50 transition-colors"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   </div>
 </div>

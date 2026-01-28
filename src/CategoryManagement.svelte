@@ -7,6 +7,37 @@
     ? (import.meta.env.VITE_API_URL || window.location.origin)
     : 'http://localhost:4000';
   
+  // Auth check with JWT verification
+  onMount(async () => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      window.location.href = '/admin';
+      return;
+    }
+    
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      
+      if (!response.ok) {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_user');
+        window.location.href = '/admin';
+      }
+    } catch (error) {
+      window.location.href = '/admin';
+    }
+  });
+  
+  function handleLogout() {
+    localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
+    window.location.href = '/';
+  }
+  
   let categories = $state([]);
   let isLoading = $state(true);
   let showModal = $state(false);
@@ -173,7 +204,7 @@
           
           <div class="flex gap-1">
             <a 
-              href="/admin" 
+              href="/admin/dashboard" 
               class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               RSS Sources
@@ -193,12 +224,20 @@
           </div>
         </div>
         
-        <a 
-          href="/" 
-          class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
-        >
-          Back to Feed
-        </a>
+        <div class="flex items-center gap-2">
+          <a 
+            href="/" 
+            class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+          >
+            ← Home
+          </a>
+          <button
+            onclick={handleLogout}
+            class="rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   </nav>

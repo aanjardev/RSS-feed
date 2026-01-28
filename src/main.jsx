@@ -1,9 +1,11 @@
 import './index.css'
 import App from './App.svelte'
+import Login from './Login.svelte'
 import Admin from './AdminShadcn.svelte'
 import CategoryManagement from './CategoryManagement.svelte'
 import ArticleManagement from './ArticleManagement.svelte'
 import SettingsManagement from './SettingsManagement.svelte'
+import UserManagement from './UserManagement.svelte'
 import { mount } from 'svelte'
 
 // Simple client-side router
@@ -29,9 +31,11 @@ function router() {
   // Static routes
   const routes = {
     '/': App,
-    '/admin': Admin,
+    '/admin': Login,
+    '/admin/dashboard': Admin,
     '/admin/categories': CategoryManagement,
-    '/admin/settings': SettingsManagement
+    '/admin/settings': SettingsManagement,
+    '/admin/users': UserManagement
   }
   
   const Component = routes[path] || App

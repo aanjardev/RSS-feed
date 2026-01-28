@@ -9,6 +9,8 @@ import adminRouter from './routes/admin.js';
 import categoriesRouter from './routes/categories.js';
 import articleManagementRouter from './routes/articleManagement.js';
 import settingsRouter from './routes/settings.js';
+import authRouter from './routes/auth.js';
+import usersRouter from './routes/users.js';
 import { startRSSFetcher } from './services/rssFetcher.js';
 
 dotenv.config();
@@ -42,6 +44,8 @@ app.use('/api/admin', adminRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/article-management', articleManagementRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 app.use('/load-more', loadMoreRouter);
 
 // Health check
