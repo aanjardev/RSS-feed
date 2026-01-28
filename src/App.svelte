@@ -291,7 +291,8 @@
         <img 
           src={settings.logo_url} 
           alt="Logo" 
-          class="h-12 w-auto object-contain"
+          style="height: {settings.logo_height || 48}px; width: {settings.logo_width || 'auto'};"
+          class="object-contain"
           onerror={(e) => e.target.style.display = 'none'}
         />
       {:else}

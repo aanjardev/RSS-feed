@@ -26,6 +26,7 @@ MIGRATIONS=(
     "002_add_categories.sql"
     "003_add_settings.sql"
     "004_add_users.sql"
+    "005_add_logo_settings.sql"
 )
 
 # Get the directory where this script is located
