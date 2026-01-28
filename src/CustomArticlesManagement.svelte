@@ -238,13 +238,13 @@
   });
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
   <!-- Navbar -->
-  <nav class="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-40">
+  <nav class="border-b border-slate-200 bg-white/80 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/80 sticky top-0 z-40">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center gap-6">
-          <a href="/" class="flex items-center gap-2 text-slate-900">
+          <a href="/" class="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -252,31 +252,31 @@
           </a>
           
           <div class="flex gap-1">
-            <a href="/admin/dashboard" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+            <a href="/admin/dashboard" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors">
               RSS Sources
             </a>
-            <a href="/admin/categories" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+            <a href="/admin/categories" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors">
               Categories
             </a>
-            <a href="/admin/custom-articles" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-900 bg-slate-100">
+            <a href="/admin/custom-articles" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-900 bg-slate-100 dark:text-slate-100 dark:bg-slate-800">
               Articles
             </a>
-            <a href="/admin/settings" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+            <a href="/admin/settings" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors">
               Settings
             </a>
-            <a href="/admin/users" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+            <a href="/admin/users" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors">
               Users
             </a>
           </div>
         </div>
         
         <div class="flex items-center gap-2">
-          <a href="/" class="text-sm font-medium text-slate-600 hover:text-slate-900">
+          <a href="/" class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100">
             ← Home
           </a>
           <button
             onclick={handleLogout}
-            class="rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors"
+            class="rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors"
           >
             Logout
           </button>
@@ -300,8 +300,8 @@
     <div class="mb-8">
       <div class="flex items-center justify-between mb-4">
         <div>
-          <h2 class="text-3xl font-bold text-gray-900">Custom Articles</h2>
-          <p class="text-gray-600 mt-1">Create and manage editorial articles</p>
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-slate-100">Custom Articles</h2>
+          <p class="text-gray-600 dark:text-slate-400 mt-1">Create and manage editorial articles</p>
         </div>
         <button
           onclick={openAddModal}
@@ -318,7 +318,7 @@
       <div class="flex gap-3 mb-4">
         <select
           bind:value={filterPublished}
-          class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="rounded-lg border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="all">All Status</option>
           <option value="published">Published</option>
@@ -329,7 +329,7 @@
           type="text"
           bind:value={searchQuery}
           placeholder="Search articles..."
-          class="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="flex-1 rounded-lg border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
     </div>
@@ -339,21 +339,21 @@
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     {:else}
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table class="w-full">
-          <thead class="bg-gray-50 border-b border-gray-200">
+          <thead class="bg-gray-50 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Title</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Source</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Category</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
+          <tbody class="divide-y divide-gray-200 dark:divide-slate-700">
             {#each articles as article}
-              <tr class="hover:bg-gray-50">
+              <tr class="hover:bg-gray-50 dark:hover:bg-slate-700">
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
                     {#if article.is_featured}
@@ -362,14 +362,14 @@
                       </svg>
                     {/if}
                     <div class="min-w-0">
-                      <div class="text-sm font-medium text-gray-900 truncate">{article.title}</div>
+                      <div class="text-sm font-medium text-gray-900 dark:text-slate-100 truncate">{article.title}</div>
                       {#if article.description}
-                        <div class="text-xs text-gray-500 truncate">{article.description.slice(0, 60)}...</div>
+                        <div class="text-xs text-gray-500 dark:text-slate-400 truncate">{article.description.slice(0, 60)}...</div>
                       {/if}
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{article.source_name}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-slate-400">{article.source_name}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   {#if article.category_name}
                     <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
@@ -382,20 +382,20 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   <span class={cn(
                     "px-2 py-1 text-xs font-semibold rounded-full",
-                    article.is_published ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                    article.is_published ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300'
                   )}>
                     {article.is_published ? 'Published' : 'Draft'}
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-slate-400">
                   {new Date(article.pub_date).toLocaleDateString()}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                   <button
                     onclick={() => handleToggleFeatured(article)}
                     class={cn(
-                      "text-yellow-600 hover:text-yellow-900",
-                      article.is_featured && "text-yellow-800"
+                      "text-yellow-600 hover:text-yellow-900 dark:hover:text-yellow-400",
+                      article.is_featured && "text-yellow-800 dark:text-yellow-500"
                     )}
                     title={article.is_featured ? 'Unfeature' : 'Feature'}
                     aria-label={article.is_featured ? 'Unfeature article' : 'Feature article'}
@@ -404,7 +404,7 @@
                   </button>
                   <button
                     onclick={() => handleTogglePublished(article)}
-                    class="text-blue-600 hover:text-blue-900"
+                    class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                     title={article.is_published ? 'Unpublish' : 'Publish'}
                     aria-label={article.is_published ? 'Unpublish article' : 'Publish article'}
                   >
@@ -412,14 +412,14 @@
                   </button>
                   <button
                     onclick={() => openEditModal(article)}
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                     aria-label="Edit article"
                   >
                     Edit
                   </button>
                   <button
                     onclick={() => handleDelete(article)}
-                    class="text-red-600 hover:text-red-900"
+                    class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                     aria-label="Delete article"
                   >
                     Delete
@@ -443,90 +443,90 @@
   <Dialog.Root bind:open={showModal}>
     <Dialog.Portal>
       <Dialog.Overlay class="fixed inset-0 bg-black/50 z-50" />
-      <Dialog.Content class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto z-50">
-        <Dialog.Title class="text-xl font-bold mb-4">
+      <Dialog.Content class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 rounded-xl shadow-xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto z-50">
+        <Dialog.Title class="text-xl font-bold mb-4 dark:text-slate-100">
           {modalMode === 'add' ? 'Create New Article' : 'Edit Article'}
         </Dialog.Title>
         
         <div class="space-y-4">
           <div class="grid grid-cols-2 gap-4">
             <div class="col-span-2">
-              <label for="article-title" class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+              <label for="article-title" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Title *</label>
               <input
                 id="article-title"
                 type="text"
                 bind:value={formData.title}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
             
             <div class="col-span-2">
-              <label for="article-description" class="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
+              <label for="article-description" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Short Description</label>
               <textarea
                 id="article-description"
                 bind:value={formData.description}
                 rows="2"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
             </div>
             
             <div class="col-span-2">
-              <label for="article-content" class="block text-sm font-medium text-gray-700 mb-1">Content (HTML supported)</label>
+              <label for="article-content" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Content (HTML supported)</label>
               <textarea
                 id="article-content"
                 bind:value={formData.content}
                 rows="6"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
               ></textarea>
             </div>
             
             <div>
-              <label for="article-image" class="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+              <label for="article-image" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Image URL</label>
               <input
                 id="article-image"
                 type="url"
                 bind:value={formData.image_url}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             
             <div>
-              <label for="article-link" class="block text-sm font-medium text-gray-700 mb-1">External Link</label>
+              <label for="article-link" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">External Link</label>
               <input
                 id="article-link"
                 type="url"
                 bind:value={formData.link}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             
             <div>
-              <label for="article-source" class="block text-sm font-medium text-gray-700 mb-1">Source Name</label>
+              <label for="article-source" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Source Name</label>
               <input
                 id="article-source"
                 type="text"
                 bind:value={formData.source_name}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             
             <div>
-              <label for="article-author" class="block text-sm font-medium text-gray-700 mb-1">Author</label>
+              <label for="article-author" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Author</label>
               <input
                 id="article-author"
                 type="text"
                 bind:value={formData.author}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             
             <div>
-              <label for="article-category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+              <label for="article-category" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Category</label>
               <select
                 id="article-category"
                 bind:value={formData.category_id}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value={null}>-- Select Category --</option>
                 {#each categories as category}
@@ -536,12 +536,12 @@
             </div>
             
             <div>
-              <label for="article-date" class="block text-sm font-medium text-gray-700 mb-1">Publish Date</label>
+              <label for="article-date" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Publish Date</label>
               <input
                 id="article-date"
                 type="datetime-local"
                 bind:value={formData.pub_date}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             
@@ -550,25 +550,25 @@
                 <input
                   type="checkbox"
                   bind:checked={formData.is_published}
-                  class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  class="rounded border-gray-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500"
                 />
-                <span class="text-sm font-medium text-gray-700">Published</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-slate-300">Published</span>
               </label>
               
               <label class="flex items-center gap-2">
                 <input
                   type="checkbox"
                   bind:checked={formData.is_featured}
-                  class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  class="rounded border-gray-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500"
                 />
-                <span class="text-sm font-medium text-gray-700">Featured</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-slate-300">Featured</span>
               </label>
             </div>
           </div>
         </div>
         
         <div class="flex justify-end gap-3 mt-6">
-          <Dialog.Close class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+          <Dialog.Close class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
             Cancel
           </Dialog.Close>
           <button
