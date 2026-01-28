@@ -20,7 +20,7 @@
     try {
       const API_BASE = import.meta.env.PROD
         ? (import.meta.env.VITE_API_URL || window.location.origin)
-        : 'http://localhost:4000';
+        : 'http://localhost:3000';
       
       const response = await fetch(`${API_BASE}/api/settings/public`);
       if (response.ok) {
@@ -40,6 +40,11 @@
             document.head.appendChild(link);
           }
           link.href = settings.favicon_url;
+        }
+        
+        if (settings.primary_color) {
+          // Update primary color CSS variable
+          document.documentElement.style.setProperty('--primary-color', settings.primary_color);
         }
       }
     } catch (error) {
@@ -252,7 +257,6 @@
   // Auto-slide
   onMount(() => {
     loadSettings();
-    loadSettings();
     loadInitialArticles();
     
     const timer = setInterval(() => {
@@ -283,28 +287,37 @@
     class="navbar px-6 border-b-2 border-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.08)] fixed top-0 left-0 right-0 z-50 {bodyBgColor}"
   >
     <div class="navbar-start flex items-center gap-3">
-      <div
-        class="btn btn-square btn-primary border-2 border-black/20 shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+      {#if settings.logo_url}
+        <img 
+          src={settings.logo_url} 
+          alt="Logo" 
+          class="h-12 w-auto object-contain"
+          onerror={(e) => e.target.style.display = 'none'}
+        />
+      {:else}
+        <div
+          class="btn btn-square btn-primary border-2 border-black/20 shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
         >
-          <path d="M4 11a9 9 0 0 1 9 9" />
-          <path d="M4 4a16 16 0 0 1 16 16" />
-          <circle cx="5" cy="19" r="1" />
-        </svg>
-      </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 11a9 9 0 0 1 9 9" />
+            <path d="M4 4a16 16 0 0 1 16 16" />
+            <circle cx="5" cy="19" r="1" />
+          </svg>
+        </div>
+      {/if}
       <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.2em]">Tilik</p>
-        <h1 class="text-2xl font-black leading-tight tracking-tight">Feed</h1>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em]">{settings.site_name || 'Tilik'}</p>
+        <h1 class="text-2xl font-black leading-tight tracking-tight">{settings.site_tagline || 'Feed'}</h1>
       </div>
     </div>
 
