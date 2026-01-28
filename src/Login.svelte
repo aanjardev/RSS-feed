@@ -86,7 +86,7 @@
               bind:value={email}
               required
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="admin@admin.com"
+              placeholder="Your Email"
               disabled={loading}
             />
           </div>
@@ -133,11 +133,6 @@
       </div>
     </div>
 
-    <!-- Demo credentials -->
-    <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-      <p class="font-semibold mb-1">Demo Credentials:</p>
-      <p>Email: <code class="bg-blue-100 px-2 py-0.5 rounded">admin@admin.com</code></p>
-      <p>Password: <code class="bg-blue-100 px-2 py-0.5 rounded">admin</code></p>
-    </div>
+   
   </div>
 </div>
