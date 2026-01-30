@@ -452,40 +452,42 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-slate-400">
                   {new Date(article.pub_date).toLocaleDateString()}
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                  <button
-                    onclick={() => handleToggleFeatured(article)}
-                    class={cn(
-                      "text-yellow-600 hover:text-yellow-900 dark:hover:text-yellow-400",
-                      article.is_featured && "text-yellow-800 dark:text-yellow-500"
-                    )}
-                    title={article.is_featured ? 'Unfeature' : 'Feature'}
-                    aria-label={article.is_featured ? 'Unfeature article' : 'Feature article'}
-                  >
-                    ★
-                  </button>
-                  <button
-                    onclick={() => handleTogglePublished(article)}
-                    class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
-                    title={article.is_published ? 'Unpublish' : 'Publish'}
-                    aria-label={article.is_published ? 'Unpublish article' : 'Publish article'}
-                  >
-                    {article.is_published ? '👁️' : '👁️‍🗨️'}
-                  </button>
-                  <button
-                    onclick={() => openEditModal(article)}
-                    class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
-                    aria-label="Edit article"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onclick={() => handleDelete(article)}
-                    class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
-                    aria-label="Delete article"
-                  >
-                    Delete
-                  </button>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div class="flex items-center justify-end gap-3">
+                    <button
+                      onclick={() => handleToggleFeatured(article)}
+                      class={cn(
+                        "text-yellow-600 hover:text-yellow-900 dark:hover:text-yellow-400 text-lg",
+                        article.is_featured && "text-yellow-800 dark:text-yellow-500"
+                      )}
+                      title={article.is_featured ? 'Unfeature' : 'Feature'}
+                      aria-label={article.is_featured ? 'Unfeature article' : 'Feature article'}
+                    >
+                      ★
+                    </button>
+                    <button
+                      onclick={() => handleTogglePublished(article)}
+                      class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 text-lg"
+                      title={article.is_published ? 'Unpublish' : 'Publish'}
+                      aria-label={article.is_published ? 'Unpublish article' : 'Publish article'}
+                    >
+                      {article.is_published ? '👁️' : '👁️‍🗨️'}
+                    </button>
+                    <button
+                      onclick={() => openEditModal(article)}
+                      class="px-2 py-1 text-indigo-600 hover:text-indigo-900 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:text-indigo-300 dark:hover:bg-indigo-900/20 rounded"
+                      aria-label="Edit article"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onclick={() => handleDelete(article)}
+                      class="px-2 py-1 text-red-600 hover:text-red-900 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20 rounded"
+                      aria-label="Delete article"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             {/each}
