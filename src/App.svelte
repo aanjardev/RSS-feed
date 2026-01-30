@@ -149,7 +149,7 @@
               id: article.id,
               title: article.title,
               desc: article.description || '',
-              image: article.image_url || `https://picsum.photos/seed/${source.id}-${article.id}/400/250`,
+              image: article.image_url || null,
               link: article.link,
               is_custom: article.is_custom || false,
               time: new Date(article.pub_date).toLocaleString('id-ID', { 
@@ -208,7 +208,7 @@
         id: article.id,
         title: article.title,
         desc: article.description || '',
-        image: article.image_url || `https://picsum.photos/seed/${sourceId}-${article.id}/400/250`,
+        image: article.image_url || null,
         link: article.link,
         is_custom: article.is_custom || false,
         time: new Date(article.pub_date).toLocaleString('id-ID', { 

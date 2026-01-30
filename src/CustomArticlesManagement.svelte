@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { Dialog } from 'bits-ui';
   import { cn } from './lib/utils';
+  import QuillEditor from './components/QuillEditor.svelte';
   
   const API_BASE = import.meta.env.PROD
     ? (import.meta.env.VITE_API_URL || window.location.origin)
@@ -516,13 +517,11 @@
             </div>
             
             <div class="col-span-2">
-              <label for="article-content" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Content (HTML supported)</label>
-              <textarea
-                id="article-content"
-                bind:value={formData.content}
-                rows="6"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
-              ></textarea>
+              <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Content</label>
+              <QuillEditor 
+                value={formData.content}
+                onChange={(html) => formData.content = html}
+              />
             </div>
             
             <div class="col-span-2">
