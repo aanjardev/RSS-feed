@@ -453,12 +453,12 @@
                   {new Date(article.pub_date).toLocaleDateString()}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium w-56">
-                  <div class="flex items-center justify-end gap-3">
+                  <div class="flex items-center justify-end gap-2">
                     <button
                       onclick={() => handleToggleFeatured(article)}
                       class={cn(
-                        "text-yellow-600 hover:text-yellow-900 dark:hover:text-yellow-400 text-lg",
-                        article.is_featured && "text-yellow-800 dark:text-yellow-500"
+                        "px-2 py-1 text-yellow-600 hover:text-yellow-900 hover:bg-yellow-50 dark:text-yellow-400 dark:hover:text-yellow-300 dark:hover:bg-yellow-900/20 rounded border border-transparent hover:border-yellow-300",
+                        article.is_featured && "bg-yellow-100 dark:bg-yellow-900/30 border-yellow-400"
                       )}
                       title={article.is_featured ? 'Unfeature' : 'Feature'}
                       aria-label={article.is_featured ? 'Unfeature article' : 'Feature article'}
@@ -467,7 +467,7 @@
                     </button>
                     <button
                       onclick={() => handleTogglePublished(article)}
-                      class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 text-lg"
+                      class="px-2 py-1 text-blue-600 hover:text-blue-900 hover:bg-blue-50 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-900/20 rounded border border-transparent hover:border-blue-300"
                       title={article.is_published ? 'Unpublish' : 'Publish'}
                       aria-label={article.is_published ? 'Unpublish article' : 'Publish article'}
                     >
@@ -475,14 +475,14 @@
                     </button>
                     <button
                       onclick={() => openEditModal(article)}
-                      class="px-2 py-1 text-indigo-600 hover:text-indigo-900 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:text-indigo-300 dark:hover:bg-indigo-900/20 rounded"
+                      class="px-3 py-1 text-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 rounded border border-indigo-600"
                       aria-label="Edit article"
                     >
                       Edit
                     </button>
                     <button
                       onclick={() => handleDelete(article)}
-                      class="px-2 py-1 text-red-600 hover:text-red-900 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20 rounded"
+                      class="px-3 py-1 text-sm text-white bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 rounded border border-red-600"
                       aria-label="Delete article"
                     >
                       Delete

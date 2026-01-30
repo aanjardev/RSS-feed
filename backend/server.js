@@ -69,6 +69,15 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Fallback route for SPA - serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  // Don't serve index.html for API routes
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 // Start RSS fetcher cron job
 const fetchInterval = parseInt(process.env.FETCH_INTERVAL) || 15;
 cron.schedule(`*/${fetchInterval} * * * *`, () => {
