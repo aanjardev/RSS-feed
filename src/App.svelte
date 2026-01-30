@@ -2,12 +2,15 @@
   import { onMount } from "svelte";
   import fallbackLogo from "./assets/logo-fallback.svg";
   import { fetchArticlesBySource, fetchAllSources } from "./api";
+  import ArticleDetail from "./ArticleDetail.svelte";
 
   let isSidebarOpen = $state(false);
   let searchQuery = $state("");
   let visibleCount = $state({});
   let currentSlide = $state(0);
   let sliderColors = $state([]);
+  let showArticleDetail = $state(false);
+  let selectedArticleId = $state(null);
   let cardColors = $state([]);
   let featuredNews = $state([]);
   let newsSources = $state([]);
@@ -141,12 +144,14 @@
             logo: source.logo,
             url: source.url,
             category: source.category,
+            is_custom: source.is_custom || false,
             news: data.articles.map((article) => ({
               id: article.id,
               title: article.title,
               desc: article.description || '',
               image: article.image_url || `https://picsum.photos/seed/${source.id}-${article.id}/400/250`,
               link: article.link,
+              is_custom: article.is_custom || false,
               time: new Date(article.pub_date).toLocaleString('id-ID', { 
                 day: 'numeric', 
                 month: 'short', 
@@ -205,6 +210,7 @@
         desc: article.description || '',
         image: article.image_url || `https://picsum.photos/seed/${sourceId}-${article.id}/400/250`,
         link: article.link,
+        is_custom: article.is_custom || false,
         time: new Date(article.pub_date).toLocaleString('id-ID', { 
           day: 'numeric', 
           month: 'short', 
@@ -233,6 +239,22 @@
     } finally {
       loadingMore[sourceId] = false;
     }
+  }
+
+  // Handle article click
+  function handleArticleClick(e, article, source) {
+    // Check if it's a custom article from papua.news
+    if (source.is_custom || source.name === 'papua.news' || source.name === 'Editorial' || source.name === 'Editorial Team') {
+      e.preventDefault();
+      selectedArticleId = article.id;
+      showArticleDetail = true;
+    }
+    // Otherwise, let the default <a> behavior open external link
+  }
+
+  function closeArticleDetail() {
+    showArticleDetail = false;
+    selectedArticleId = null;
   }
 
   // Scroll to source card when clicked in sidebar
@@ -524,9 +546,10 @@
             <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4 bg-base-200">
               {#each source.news.slice(0, shown) as item, idx}
                 <a
-                  href={item.link}
+                  href={item.link || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onclick={(e) => handleArticleClick(e, item, source)}
                   class="group card card-compact border border-black/15 shadow-[1px_1px_0_rgba(0,0,0,0.08)] neo-hover {cardColors[
                     (idx + sourceIdx) % cardColors.length
                   ]} block no-underline hover:border-black/25 hover:shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
@@ -771,6 +794,14 @@
         role="button"
         tabindex="0"
       ></div>
+    {/if}
+    
+    <!-- Article Detail Modal -->
+    {#if showArticleDetail && selectedArticleId}
+      <ArticleDetail 
+        articleId={selectedArticleId}
+        onClose={closeArticleDetail}
+      />
     {/if}
   </div>
 </div>
