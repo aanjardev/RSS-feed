@@ -58,8 +58,6 @@
 </div>
 
 <style>
-  @import 'quill/dist/quill.snow.css';
-  
   :global(.wysiwyg-editor) {
     min-height: 300px;
     background: white;
