@@ -658,19 +658,6 @@
           </span>
         </div>
 
-        <!-- About Link -->
-        <a
-          href="/about"
-          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          Tentang Kami
-        </a>
-
         <label
           class="input input-bordered input-lg flex items-center gap-2 shadow-[var(--shadow-1)] bg-base-200 border-2 border-neutral"
         >
@@ -722,6 +709,19 @@
             </li>
           {/each}
         </ul>
+
+        <!-- About Link -->
+        <a
+          href="/about"
+          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          Tentang Kami
+        </a>
       </div>
     </aside>
 
@@ -759,19 +759,6 @@
             </svg>
           </button>
         </div>
-
-        <!-- About Link -->
-        <a
-          href="/about"
-          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          Tentang Kami
-        </a>
 
         <label
           class="input input-bordered input-lg flex items-center gap-2 shadow-[var(--shadow-1)] bg-base-200 border-2 border-neutral"
@@ -826,6 +813,19 @@
             </li>
           {/each}
         </ul>
+
+        <!-- About Link -->
+        <a
+          href="/about"
+          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          Tentang Kami
+        </a>
       </div>
     </aside>
 
