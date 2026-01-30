@@ -16,6 +16,7 @@ import usersRouter from './routes/users.js';
 import customArticlesRouter from './routes/customArticles.js';
 import uploadRouter from './routes/upload.js';
 import commentsRouter from './routes/comments.js';
+import themeRouter from './routes/theme.js';
 import { startRSSFetcher } from './services/rssFetcher.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -60,6 +61,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/custom-articles', customArticlesRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/theme', themeRouter);
 app.use('/load-more', loadMoreRouter);
 
 // Health check

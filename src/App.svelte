@@ -65,7 +65,28 @@
     return shuffled;
   }
 
-  // All colors
+  // Load theme colors from API
+  async function loadThemeColors() {
+    try {
+      const API_BASE = import.meta.env.PROD
+        ? (import.meta.env.VITE_API_URL || window.location.origin)
+        : 'http://localhost:3000';
+      
+      const response = await fetch(`${API_BASE}/api/theme`);
+      if (response.ok) {
+        const data = await response.json();
+        return {
+          sliderColors: data.slider_colors || allSliderColors,
+          cardColors: data.card_colors || allCardColors
+        };
+      }
+    } catch (error) {
+      console.error('Error loading theme colors:', error);
+    }
+    return null;
+  }
+
+  // All colors (defaults)
   const allSliderColors = [
     "bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-500",
     "bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500",
@@ -119,8 +140,21 @@
   ];
 
   // Initialize colors on mount
-  sliderColors = shuffleArray(allSliderColors);
-  cardColors = shuffleArray(allCardColors);
+  onMount(async () => {
+    await loadSettings();
+    
+    // Load theme colors from API
+    const themeData = await loadThemeColors();
+    if (themeData) {
+      sliderColors = shuffleArray(themeData.sliderColors);
+      cardColors = shuffleArray(themeData.cardColors);
+    } else {
+      sliderColors = shuffleArray(allSliderColors);
+      cardColors = shuffleArray(allCardColors);
+    }
+    
+    await loadInitialArticles();
+  });
   let bodyBgColor = $state(allBodyBackgrounds[Math.floor(Math.random() * allBodyBackgrounds.length)]);
   $effect(() => {
     bodyBgColor = allBodyBackgrounds[Math.floor(Math.random() * allBodyBackgrounds.length)];

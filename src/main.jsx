@@ -9,6 +9,7 @@ import UserManagement from './UserManagement.svelte'
 import CustomArticlesManagement from './CustomArticlesManagement.svelte'
 import ArticlePage from './ArticlePage.svelte'
 import About from './About.svelte'
+import ThemeManagement from './ThemeManagement.svelte'
 import { mount } from 'svelte'
 
 // Simple client-side router
@@ -51,7 +52,8 @@ function router() {
     '/admin/categories': CategoryManagement,
     '/admin/custom-articles': CustomArticlesManagement,
     '/admin/settings': SettingsManagement,
-    '/admin/users': UserManagement
+    '/admin/users': UserManagement,
+    '/admin/theme': ThemeManagement
   }
   
   const Component = routes[path] || App
