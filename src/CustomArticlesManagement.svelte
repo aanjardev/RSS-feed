@@ -410,7 +410,7 @@
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Category</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Status</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Date</th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Actions</th>
+              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider w-56">Actions</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 dark:divide-slate-700">
@@ -452,7 +452,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-slate-400">
                   {new Date(article.pub_date).toLocaleDateString()}
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium w-56">
                   <div class="flex items-center justify-end gap-3">
                     <button
                       onclick={() => handleToggleFeatured(article)}
