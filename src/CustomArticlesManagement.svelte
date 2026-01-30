@@ -517,7 +517,7 @@
             </div>
             
             <div class="col-span-2">
-              <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Content</label>
+              <div class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Content</div>
               <QuillEditor 
                 value={formData.content}
                 onChange={(html) => formData.content = html}
