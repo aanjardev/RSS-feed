@@ -16,8 +16,18 @@ router.get('/', async (req, res) => {
     
     // Check if filtering by custom source
     if (sourceId && sourceId.startsWith('custom-')) {
-      // Extract source name from custom ID (e.g., custom-papua.news -> papua.news)
-      const sourceName = sourceId.replace('custom-', '').replace(/-/g, '.');
+      // Extract source name from custom ID
+      // Decode from base64 if it exists, otherwise use old format
+      let sourceName;
+      const idPart = sourceId.replace('custom-', '');
+      
+      try {
+        // Try to decode from base64
+        sourceName = Buffer.from(idPart, 'base64').toString('utf-8');
+      } catch {
+        // Fallback: convert dashes to spaces and capitalize
+        sourceName = idPart.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      }
       
       const articles = await CustomArticle.getBySourceName(sourceName, limit);
       allArticles = articles.map(ca => ({
@@ -66,8 +76,16 @@ router.get('/source/:sourceId', async (req, res) => {
     // Check if it's a custom source (starts with 'custom-')
     if (sourceId.startsWith('custom-')) {
       // Extract the source name from the custom ID
-      // Convert back from custom-papua.news to papua.news
-      const sourceName = sourceId.replace('custom-', '').replace(/-/g, '.');
+      let sourceName;
+      const idPart = sourceId.replace('custom-', '');
+      
+      try {
+        // Try to decode from base64
+        sourceName = Buffer.from(idPart, 'base64').toString('utf-8');
+      } catch {
+        // Fallback: convert dashes to spaces and capitalize
+        sourceName = idPart.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      }
       
       const articles = await CustomArticle.getBySourceName(sourceName, limit);
       const formattedArticles = articles.map(ca => ({
@@ -122,11 +140,11 @@ router.get('/sources', async (req, res) => {
     
     const customResult = await pool.query(customQuery);
     
-    // Combine sources - add custom sources with custom ID format: custom-{sourcename}
+    // Combine sources - add custom sources with custom ID using base64 encoding
     const allSources = [
       ...rssResult.rows,
       ...customResult.rows.map(cs => ({
-        id: `custom-${cs.name.toLowerCase().replace(/\s+/g, '-')}`,
+        id: `custom-${Buffer.from(cs.name).toString('base64')}`,
         name: cs.name,
         url: null,
         logo: null,
