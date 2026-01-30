@@ -87,6 +87,7 @@ class CustomArticle {
   }
 
   // Get single article by ID
+  // Get single article by ID
   static async getById(id) {
     try {
       const result = await pool.query(
@@ -99,6 +100,25 @@ class CustomArticle {
       return result.rows[0];
     } catch (error) {
       console.error('Error getting custom article by ID:', error);
+      throw error;
+    }
+  }
+
+  // Get articles by source name
+  static async getBySourceName(sourceName, limit = 20) {
+    try {
+      const result = await pool.query(
+        `SELECT ca.*, c.name as category_name
+         FROM custom_articles ca
+         LEFT JOIN categories c ON ca.category_id = c.id
+         WHERE ca.source_name = $1 AND ca.is_published = true
+         ORDER BY ca.pub_date DESC, ca.created_at DESC
+         LIMIT $2`,
+        [sourceName, limit]
+      );
+      return result.rows;
+    } catch (error) {
+      console.error('Error getting articles by source name:', error);
       throw error;
     }
   }

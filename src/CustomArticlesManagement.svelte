@@ -55,7 +55,7 @@
     image_url: '',
     link: '',
     author: '',
-    source_name: 'Editorial',
+    source_name: 'papua.news',
     category_id: null,
     is_published: true,
     is_featured: false,
@@ -71,9 +71,11 @@
     try {
       const response = await fetch(`${API_BASE}/api/categories`);
       if (!response.ok) throw new Error('Failed to load categories');
-      categories = await response.json();
+      const data = await response.json();
+      categories = data.categories || [];
     } catch (error) {
       console.error('Error loading categories:', error);
+      categories = [];
     }
   }
   
@@ -109,7 +111,7 @@
       image_url: '',
       link: '',
       author: '',
-      source_name: 'Editorial',
+      source_name: 'papua.news',
       category_id: null,
       is_published: true,
       is_featured: false,
