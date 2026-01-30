@@ -169,6 +169,16 @@
       );
       newsSources = results.filter(source => source.news.length > 0);
       
+      // Sort sources: custom articles (papua.news, Editorial) first
+      newsSources = newsSources.sort((a, b) => {
+        const aIsCustom = a.is_custom || a.name === 'papua.news' || a.name.includes('Editorial');
+        const bIsCustom = b.is_custom || b.name === 'papua.news' || b.name.includes('Editorial');
+        
+        if (aIsCustom && !bIsCustom) return -1;
+        if (!aIsCustom && bIsCustom) return 1;
+        return 0; // Keep original order for same type
+      });
+      
       // Initialize visible count and loading state for each source
       newsSources.forEach((source) => {
         visibleCount[source.id] = 11;
@@ -648,6 +658,19 @@
           </span>
         </div>
 
+        <!-- About Link -->
+        <a
+          href="/about"
+          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          Tentang Kami
+        </a>
+
         <label
           class="input input-bordered input-lg flex items-center gap-2 shadow-[var(--shadow-1)] bg-base-200 border-2 border-neutral"
         >
@@ -736,6 +759,19 @@
             </svg>
           </button>
         </div>
+
+        <!-- About Link -->
+        <a
+          href="/about"
+          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          Tentang Kami
+        </a>
 
         <label
           class="input input-bordered input-lg flex items-center gap-2 shadow-[var(--shadow-1)] bg-base-200 border-2 border-neutral"
