@@ -1,9 +1,19 @@
 -- Migration: Add comments table and slug to custom articles
 -- Date: 2026-01-30
 
--- Add slug column to custom_articles
-ALTER TABLE custom_articles 
-ADD COLUMN IF NOT EXISTS slug VARCHAR(255) UNIQUE;
+-- Add slug column to custom_articles (if not exists)
+DO $$ 
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='custom_articles' AND column_name='slug'
+  ) THEN
+    ALTER TABLE custom_articles ADD COLUMN slug VARCHAR(255);
+  END IF;
+END $$;
+
+-- Create unique index on slug
+CREATE UNIQUE INDEX IF NOT EXISTS idx_custom_articles_slug_unique ON custom_articles(slug);
 
 -- Create comments table
 CREATE TABLE IF NOT EXISTS article_comments (
@@ -17,17 +27,6 @@ CREATE TABLE IF NOT EXISTS article_comments (
   CONSTRAINT fk_article FOREIGN KEY (article_id) REFERENCES custom_articles(id)
 );
 
--- Create index for faster queries
+-- Create indexes for faster queries
 CREATE INDEX IF NOT EXISTS idx_comments_article_id ON article_comments(article_id);
 CREATE INDEX IF NOT EXISTS idx_comments_created_at ON article_comments(created_at DESC);
-CREATE INDEX IF NOT EXISTS idx_custom_articles_slug ON custom_articles(slug);
-
--- Generate slugs for existing articles
-UPDATE custom_articles
-SET slug = LOWER(
-  REGEXP_REPLACE(
-    REGEXP_REPLACE(title, '[^a-zA-Z0-9\s-]', '', 'g'),
-    '\s+', '-', 'g'
-  )
-)
-WHERE slug IS NULL;
