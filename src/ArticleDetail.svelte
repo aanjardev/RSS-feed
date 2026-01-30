@@ -1,8 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   
-  export let articleId;
-  export let onClose;
+  let { articleId, onClose } = $props();
   
   const API_BASE = import.meta.env.PROD
     ? (import.meta.env.VITE_API_URL || window.location.origin)
