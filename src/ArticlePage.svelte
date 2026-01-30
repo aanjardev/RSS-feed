@@ -318,29 +318,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-base-200 border-t-4 border-neutral mt-12">
-      <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Brand -->
-          <div>
-            <h3 class="text-xl font-black mb-2">papua.news</h3>
-            <p class="text-sm opacity-80">
-              Portal berita terkini Papua dan Indonesia Timur
-            </p>
-          </div>
-          
-          <!-- Links -->
-          <div class="text-sm">
-            <div class="flex flex-wrap gap-4">
-              <a href="/" class="hover:text-primary transition-colors">🏠 Beranda</a>
-              <a href="/about" class="hover:text-primary transition-colors">ℹ️ Tentang</a>
-              <a href="mailto:info@papua.news" class="hover:text-primary transition-colors">✉️ Kontak</a>
-            </div>
-            <p class="text-xs opacity-60 mt-4">
-              © 2026 papua.news - 🏔️ Tanah Papua, Tanah Cinta
-            </p>
-          </div>
-        </div>
+    <footer class="bg-base-200 border-t-2 border-neutral py-4 mt-12">
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-sm opacity-80">
+          © 2026 papua.news - Portal Berita Papua dan Indonesia Timur
+        </p>
       </div>
     </footer>
   {/if}
