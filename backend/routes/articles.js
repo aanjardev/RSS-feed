@@ -12,23 +12,38 @@ router.get('/', async (req, res) => {
     const offset = parseInt(req.query.offset) || 0;
     const sourceId = req.query.source_id || null;
     
-    // Get RSS articles
-    const rssArticles = await Article.getAll(limit, offset, sourceId);
+    let allArticles = [];
     
-    // Get published custom articles only if no specific source filter
-    let allArticles = [...rssArticles];
-    if (!sourceId) {
-      const customResult = await CustomArticle.getAll(limit, 0, { is_published: true });
-      const customArticles = customResult.articles.map(ca => ({
+    // Check if filtering by custom source
+    if (sourceId && sourceId.startsWith('custom-')) {
+      // Extract source name from custom ID (e.g., custom-papua.news -> papua.news)
+      const sourceName = sourceId.replace('custom-', '').replace(/-/g, '.');
+      
+      const articles = await CustomArticle.getBySourceName(sourceName, limit);
+      allArticles = articles.map(ca => ({
         ...ca,
         source_name: ca.source_name || 'Editorial',
         is_custom: true
       }));
+    } else {
+      // Get RSS articles
+      const rssArticles = await Article.getAll(limit, offset, sourceId);
       
-      // Combine and sort by pub_date
-      allArticles = [...rssArticles, ...customArticles]
-        .sort((a, b) => new Date(b.pub_date) - new Date(a.pub_date))
-        .slice(offset, offset + limit);
+      // Get published custom articles only if no specific source filter
+      allArticles = [...rssArticles];
+      if (!sourceId) {
+        const customResult = await CustomArticle.getAll(limit, 0, { is_published: true });
+        const customArticles = customResult.articles.map(ca => ({
+          ...ca,
+          source_name: ca.source_name || 'Editorial',
+          is_custom: true
+        }));
+        
+        // Combine and sort by pub_date
+        allArticles = [...rssArticles, ...customArticles]
+          .sort((a, b) => new Date(b.pub_date) - new Date(a.pub_date))
+          .slice(offset, offset + limit);
+      }
     }
     
     res.json({
