@@ -1,5 +1,15 @@
 import pool from '../config/database.js';
 
+// Helper function to generate URL-friendly slug
+function generateSlug(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single
+    .substring(0, 200); // Limit length
+}
+
 class CustomArticle {
   // Get all custom articles with pagination and filters
   static async getAll(limit = 50, offset = 0, filters = {}) {
@@ -123,6 +133,23 @@ class CustomArticle {
     }
   }
 
+  // Get article by slug
+  static async getBySlug(slug) {
+    try {
+      const result = await pool.query(
+        `SELECT ca.*, c.name as category_name
+         FROM custom_articles ca
+         LEFT JOIN categories c ON ca.category_id = c.id
+         WHERE ca.slug = $1 AND ca.is_published = true`,
+        [slug]
+      );
+      return result.rows[0];
+    } catch (error) {
+      console.error('Error getting article by slug:', error);
+      throw error;
+    }
+  }
+
   // Create new custom article
   static async create(articleData) {
     try {
@@ -140,11 +167,31 @@ class CustomArticle {
         pub_date
       } = articleData;
 
+      // Generate unique slug
+      let slug = generateSlug(title);
+      let slugExists = true;
+      let counter = 1;
+      
+      // Check if slug exists, if so add counter
+      while (slugExists) {
+        const checkSlug = await pool.query(
+          'SELECT id FROM custom_articles WHERE slug = $1',
+          [counter > 1 ? `${slug}-${counter}` : slug]
+        );
+        
+        if (checkSlug.rows.length === 0) {
+          slug = counter > 1 ? `${slug}-${counter}` : slug;
+          slugExists = false;
+        } else {
+          counter++;
+        }
+      }
+
       const result = await pool.query(
         `INSERT INTO custom_articles (
           title, description, content, image_url, link, author,
-          source_name, category_id, is_published, is_featured, pub_date
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+          source_name, category_id, is_published, is_featured, pub_date, slug
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
         RETURNING *`,
         [
           title,
@@ -157,7 +204,8 @@ class CustomArticle {
           category_id || null,
           is_published !== undefined ? is_published : true,
           is_featured !== undefined ? is_featured : false,
-          pub_date || new Date()
+          pub_date || new Date(),
+          slug
         ]
       );
       return result.rows[0];

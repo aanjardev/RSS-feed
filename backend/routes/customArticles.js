@@ -57,7 +57,21 @@ router.get('/featured', async (req, res) => {
   }
 });
 
-// GET /api/custom-articles/:id - Get single custom article
+// GET /api/custom-articles/slug/:slug - Get article by slug
+router.get('/slug/:slug', async (req, res) => {
+  try {
+    const result = await CustomArticle.getBySlug(req.params.slug);
+    if (!result) {
+      return res.status(404).json({ error: 'Article not found' });
+    }
+    res.json(result);
+  } catch (error) {
+    console.error('Error fetching article by slug:', error);
+    res.status(500).json({ error: 'Failed to fetch article' });
+  }
+});
+
+// GET /api/custom-articles/:id - Get single custom article by ID
 router.get('/:id', async (req, res) => {
   try {
     const article = await CustomArticle.getById(req.params.id);

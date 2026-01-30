@@ -151,6 +151,7 @@
               desc: article.description || '',
               image: article.image_url || null,
               link: article.link,
+              slug: article.slug,
               is_custom: article.is_custom || false,
               time: new Date(article.pub_date).toLocaleString('id-ID', { 
                 day: 'numeric', 
@@ -210,6 +211,7 @@
         desc: article.description || '',
         image: article.image_url || null,
         link: article.link,
+        slug: article.slug,
         is_custom: article.is_custom || false,
         time: new Date(article.pub_date).toLocaleString('id-ID', { 
           day: 'numeric', 
@@ -246,8 +248,13 @@
     // Check if it's a custom article from papua.news
     if (source.is_custom || source.name === 'papua.news' || source.name === 'Editorial' || source.name === 'Editorial Team') {
       e.preventDefault();
-      selectedArticleId = article.id;
-      showArticleDetail = true;
+      if (article.slug) {
+        window.location.href = `/artikel/${article.slug}`;
+      } else {
+        // Fallback to modal if no slug
+        selectedArticleId = article.id;
+        showArticleDetail = true;
+      }
     }
     // Otherwise, let the default <a> behavior open external link
   }

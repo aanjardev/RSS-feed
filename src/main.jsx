@@ -7,6 +7,7 @@ import ArticleManagement from './ArticleManagement.svelte'
 import SettingsManagement from './SettingsManagement.svelte'
 import UserManagement from './UserManagement.svelte'
 import CustomArticlesManagement from './CustomArticlesManagement.svelte'
+import ArticlePage from './ArticlePage.svelte'
 import { mount } from 'svelte'
 
 // Simple client-side router
@@ -14,6 +15,17 @@ function router() {
   const path = window.location.pathname
   const root = document.getElementById('root')
   root.innerHTML = ''
+  
+  // Match article page route /artikel/:slug
+  const articlePageMatch = path.match(/^\/artikel\/([a-z0-9-]+)$/)
+  if (articlePageMatch) {
+    const slug = articlePageMatch[1]
+    mount(ArticlePage, { 
+      target: root,
+      props: { slug }
+    })
+    return
+  }
   
   // Match article management route with ID
   const articleMatch = path.match(/^\/admin\/articles\/(\d+)$/)
