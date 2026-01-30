@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import sourcesRouter from './routes/sources.js';
 import articlesRouter from './routes/articles.js';
 import loadMoreRouter from './routes/loadMore.js';
@@ -12,7 +14,11 @@ import settingsRouter from './routes/settings.js';
 import authRouter from './routes/auth.js';
 import usersRouter from './routes/users.js';
 import customArticlesRouter from './routes/customArticles.js';
+import uploadRouter from './routes/upload.js';
 import { startRSSFetcher } from './services/rssFetcher.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -38,6 +44,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
+
 // Routes
 app.use('/api/sources', sourcesRouter);
 app.use('/api/articles', articlesRouter);
@@ -48,6 +57,7 @@ app.use('/api/settings', settingsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/custom-articles', customArticlesRouter);
+app.use('/api/upload', uploadRouter);
 app.use('/load-more', loadMoreRouter);
 
 // Health check
