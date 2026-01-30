@@ -51,6 +51,30 @@
   let imageUploadMode = $state('url'); // 'url' or 'upload'
   let uploadingImage = $state(false);
   
+  // Computed filtered articles
+  let filteredArticles = $derived.by(() => {
+    let filtered = articles;
+    
+    // Filter by published status
+    if (filterPublished === 'published') {
+      filtered = filtered.filter(a => a.is_published);
+    } else if (filterPublished === 'draft') {
+      filtered = filtered.filter(a => !a.is_published);
+    }
+    
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(a => 
+        a.title.toLowerCase().includes(query) ||
+        (a.description && a.description.toLowerCase().includes(query)) ||
+        (a.source_name && a.source_name.toLowerCase().includes(query))
+      );
+    }
+    
+    return filtered;
+  });
+  
   let formData = $state({
     title: '',
     description: '',
@@ -125,15 +149,8 @@
   async function loadArticles() {
     loading = true;
     try {
-      let url = `${API_BASE}/api/custom-articles?limit=100`;
-      if (filterPublished !== 'all') {
-        url += `&is_published=${filterPublished === 'published'}`;
-      }
-      if (searchQuery) {
-        url += `&search=${encodeURIComponent(searchQuery)}`;
-      }
-      
-      const response = await fetch(url);
+      // Load all articles without filtering - we'll filter in frontend
+      const response = await fetch(`${API_BASE}/api/custom-articles?limit=100`);
       if (!response.ok) throw new Error('Failed to load articles');
       const data = await response.json();
       articles = data.articles;
@@ -397,7 +414,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 dark:divide-slate-700">
-            {#each articles as article}
+            {#each filteredArticles as article}
               <tr class="hover:bg-gray-50 dark:hover:bg-slate-700">
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
@@ -475,9 +492,9 @@
           </tbody>
         </table>
         
-        {#if articles.length === 0}
-          <div class="text-center py-12 text-gray-500">
-            No articles found. Create your first custom article!
+        {#if filteredArticles.length === 0 && !loading}
+          <div class="text-center py-12 text-gray-500 dark:text-slate-400">
+            {searchQuery || filterPublished !== 'all' ? 'No articles match your filters' : 'No articles found. Create your first custom article!'}
           </div>
         {/if}
       </div>
