@@ -34,6 +34,10 @@
 <div 
   class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4"
   onclick={handleBackdropClick}
+  onkeydown={(e) => e.key === 'Escape' && onClose()}
+  role="button"
+  tabindex="-1"
+  aria-label="Close modal"
 >
   <div class="bg-base-100 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-neutral">
     <!-- Header -->
