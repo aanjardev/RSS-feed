@@ -526,7 +526,7 @@
             </div>
             
             <div class="col-span-2">
-              <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Image</label>
+              <div class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Image</div>
               
               <!-- Toggle between URL and Upload -->
               <div class="flex gap-2 mb-3">
