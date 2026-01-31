@@ -10,6 +10,7 @@ import CustomArticlesManagement from './CustomArticlesManagement.svelte'
 import ArticlePage from './ArticlePage.svelte'
 import About from './About.svelte'
 import ThemeManagement from './ThemeManagement.svelte'
+import TermsOfService from './TermsOfService.svelte'
 import { mount } from 'svelte'
 
 // Simple client-side router
@@ -47,6 +48,7 @@ function router() {
   const routes = {
     '/': App,
     '/about': About,
+    '/terms': TermsOfService,
     '/admin': Login,
     '/admin/dashboard': Admin,
     '/admin/categories': CategoryManagement,

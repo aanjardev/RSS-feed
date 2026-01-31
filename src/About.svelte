@@ -136,8 +136,13 @@
   <footer class="bg-base-200 border-t-2 border-neutral py-4 mt-12">
     <div class="container mx-auto px-4 text-center">
       <p class="text-sm opacity-80">
-        © 2026 papua.news - Portal Berita Papua dan Indonesia Timur
+        © 2026 papua.news - Portal RSS Feed Berita Papua
       </p>
+      <div class="mt-2">
+        <button onclick={() => navigateTo('/terms')} class="text-sm text-primary hover:underline">
+          Syarat & Ketentuan
+        </button>
+      </div>
     </div>
   </footer>
 </div>
