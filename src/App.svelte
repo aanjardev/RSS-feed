@@ -328,6 +328,21 @@
   // Prepare featured news
   featuredNews = [];
 
+  // Handle image load error
+  function handleImageError(event) {
+    event.target.style.display = 'none';
+  }
+
+  // Handle slider image error with gradient background fallback
+  function handleSliderImageError(event, bgColor) {
+    event.target.style.display = 'none';
+    // Show the gradient background instead
+    const parent = event.target.parentElement;
+    if (parent) {
+      parent.classList.add(bgColor);
+    }
+  }
+
   // Auto-slide
   onMount(() => {
     loadSettings();
@@ -462,6 +477,7 @@
                       width="1280"
                       height="400"
                       class="absolute inset-0 w-full h-full object-cover"
+                      onerror={(e) => handleSliderImageError(e, news.bgColor)}
                     />
 
                     <!-- Dark Gradient for Text -->
@@ -480,6 +496,7 @@
                           width="32"
                           height="32"
                           class="w-8 h-8 rounded-full border-2 border-white bg-white"
+                          onerror={(e) => { e.target.src = fallbackLogo; }}
                         />
                         <span
                           class="text-xs font-bold uppercase tracking-wide"
@@ -622,6 +639,7 @@
                           width="640"
                           height="360"
                           class="w-full aspect-video object-cover"
+                          onerror={handleImageError}
                         />
                       </figure>
                     {/if}
@@ -729,6 +747,7 @@
                   src={source.logo || fallbackLogo}
                   alt={source.name}
                   class="w-6 h-6 rounded-md object-cover flex-shrink-0"
+                  onerror={(e) => { e.target.src = fallbackLogo; }}
                 />
                 <span class="flex-1 text-left">{source.name}</span>
                 <span
@@ -833,6 +852,7 @@
                   src={source.logo || fallbackLogo}
                   alt={source.name}
                   class="w-6 h-6 rounded-md object-cover flex-shrink-0"
+                  onerror={(e) => { e.target.src = fallbackLogo; }}
                 />
                 <span class="flex-1 text-left">{source.name}</span>
                 <span
