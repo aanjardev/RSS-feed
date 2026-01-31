@@ -513,10 +513,26 @@
                         {news.title}
                       </h2>
                       <p
-                        class="text-sm md:text-base opacity-90 line-clamp-2 max-w-3xl"
+                        class="text-sm md:text-base opacity-90 line-clamp-2 max-w-3xl mb-4"
                       >
                         {news.desc}
                       </p>
+                      <button
+                        onclick={() => {
+                          if (news.slug) {
+                            window.location.href = `/artikel/${news.slug}`;
+                          } else if (news.link) {
+                            window.open(news.link, '_blank');
+                          }
+                        }}
+                        class="btn btn-primary btn-sm border-2 border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
+                      >
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M5 12h14"/>
+                          <path d="m12 5 7 7-7 7"/>
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
