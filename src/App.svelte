@@ -220,16 +220,18 @@
         loadingMore[source.id] = false;
       });
       
-      // Prepare featured news from loaded articles
+      // Prepare featured news - ONLY from custom articles (papua.news/Editorial) with images
       featuredNews = results
+        .filter((source) => source.is_custom || source.name === 'papua.news' || source.name === 'Papua.News' || source.name.includes('Editorial'))
         .flatMap((source) =>
-          source.news.slice(0, 2).map((news) => ({
+          source.news.map((news) => ({
             ...news,
             sourceName: source.name,
             sourceLogo: source.logo || fallbackLogo,
           }))
         )
-        .slice(0, 6)
+        .filter((news) => news.image && news.image !== null && news.image !== '') // Only articles with images
+        .slice(0, 10) // Limit to 10 articles
         .map((news, idx) => ({
           ...news,
           bgColor: sliderColors[idx % sliderColors.length],
