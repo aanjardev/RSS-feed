@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { navigateTo } from './main.jsx';
   
   let { slug } = $props();
   

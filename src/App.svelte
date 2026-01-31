@@ -3,6 +3,7 @@
   import fallbackLogo from "./assets/logo-fallback.svg";
   import { fetchArticlesBySource, fetchAllSources } from "./api";
   import ArticleDetail from "./ArticleDetail.svelte";
+  import { navigateTo } from "./main.jsx";
 
   let isSidebarOpen = $state(false);
   let searchQuery = $state("");

@@ -1,4 +1,5 @@
 <script>
+  import { navigateTo } from './main.jsx';
   function goBack() {
     window.location.href = '/';
   }

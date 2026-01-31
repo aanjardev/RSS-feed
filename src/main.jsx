@@ -66,6 +66,12 @@ function router() {
 window.addEventListener('popstate', router)
 window.addEventListener('DOMContentLoaded', router)
 
+// Export navigation function for use in components
+export function navigateTo(path) {
+  window.history.pushState({}, '', path)
+  router()
+}
+
 // Initial route
 router()
 
