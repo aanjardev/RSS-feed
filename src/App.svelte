@@ -755,7 +755,7 @@
         </label>
 
         <ul
-          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-200px)] overflow-y-auto"
+          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-320px)] overflow-y-auto"
         >
           {#each filteredSources as source (source.id)}
             <li>
@@ -858,7 +858,7 @@
         </label>
 
         <ul
-          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-200px)] overflow-y-auto"
+          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-320px)] overflow-y-auto"
         >
           {#each filteredSources as source (source.id)}
             <li>
