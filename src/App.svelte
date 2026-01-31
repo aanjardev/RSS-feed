@@ -783,8 +783,8 @@
         </ul>
 
         <!-- About Link -->
-        <a
-          href="/about"
+        <button
+          onclick={() => navigateTo('/about')}
           class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -793,7 +793,7 @@
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           Tentang Kami
-        </a>
+        </button>
       </div>
     </aside>
 
@@ -888,8 +888,8 @@
         </ul>
 
         <!-- About Link -->
-        <a
-          href="/about"
+        <button
+          onclick={() => navigateTo('/about')}
           class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -898,7 +898,7 @@
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           Tentang Kami
-        </a>
+        </button>
       </div>
     </aside>
 

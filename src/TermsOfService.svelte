@@ -1,16 +1,26 @@
 <script>
   import { navigateTo } from './main.jsx';
+  
+  function goBack() {
+    window.history.back();
+  }
 </script>
 
 <div class="min-h-screen bg-base-100">
   <!-- Header -->
-  <header class="bg-base-200 border-b-2 border-neutral sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4">
-      <div class="flex items-center justify-between">
-        <button onclick={() => navigateTo('/')} class="flex items-center gap-2 cursor-pointer">
-          <span class="text-2xl font-bold text-primary">Papua.News</span>
-        </button>
-      </div>
+  <header class="sticky top-0 z-50 bg-base-100 border-b-4 border-neutral shadow-[var(--shadow-1)]">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <button onclick={goBack} class="btn btn-ghost gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Kembali
+      </button>
+      
+      <a href="/" class="text-2xl font-black">papua.news</a>
+      
+      <div class="w-[100px]"></div> <!-- Spacer for centering -->
     </div>
   </header>
 
