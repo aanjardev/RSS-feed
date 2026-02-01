@@ -3,5 +3,4 @@
 
 UPDATE rss_sources 
 SET logo = (SELECT value FROM settings WHERE key = 'favicon_url' LIMIT 1)
-WHERE name IN ('papua.news', 'Papua.News', 'Papua News', 'Editorial', 'Editorial Team')
-  OR is_custom = true;
+WHERE name IN ('papua.news', 'Papua.News', 'Papua News', 'Editorial', 'Editorial Team');
