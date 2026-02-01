@@ -7,12 +7,20 @@
     ? (import.meta.env.VITE_API_URL || window.location.origin)
     : 'http://localhost:4000';
   
+  let currentUser = $state(null);
+  
   // Auth check
   onMount(async () => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       window.location.href = '/admin';
       return;
+    }
+    
+    // Get user info from localStorage
+    const userData = localStorage.getItem('admin_user');
+    if (userData) {
+      currentUser = JSON.parse(userData);
     }
     
     // Verify token with backend
@@ -202,6 +210,7 @@
           </a>
           
           <div class="flex gap-1">
+            {#if currentUser?.role === 'admin'}
             <a 
               href="/admin/dashboard" 
               class="rounded-lg px-3 py-2 text-sm font-medium text-slate-900 bg-slate-100 dark:text-slate-100 dark:bg-slate-800"
@@ -214,12 +223,14 @@
             >
               Categories
             </a>
+            {/if}
             <a 
               href="/admin/custom-articles" 
               class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               Articles
             </a>
+            {#if currentUser?.role === 'admin'}
             <a 
               href="/admin/settings" 
               class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -238,6 +249,7 @@
             >
               Users
             </a>
+            {/if}
           </div>
         </div>
         

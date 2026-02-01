@@ -7,12 +7,20 @@
     ? (import.meta.env.VITE_API_URL || window.location.origin)
     : 'http://localhost:4000';
   
+  let currentUser = $state(null);
+  
   // Auth check with JWT verification
   onMount(async () => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       window.location.href = '/admin';
       return;
+    }
+    
+    // Get user info from localStorage
+    const userData = localStorage.getItem('admin_user');
+    if (userData) {
+      currentUser = JSON.parse(userData);
     }
     
     try {

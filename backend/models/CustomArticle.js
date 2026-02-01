@@ -43,6 +43,13 @@ class CustomArticle {
         params.push(filters.category_id);
         paramIndex++;
       }
+      
+      // Filter by author_id (for kontributor role)
+      if (filters.author_id) {
+        query += ` AND ca.author_id = $${paramIndex}`;
+        params.push(filters.author_id);
+        paramIndex++;
+      }
 
       // Search in title and description
       if (filters.search) {
@@ -75,6 +82,11 @@ class CustomArticle {
       if (filters.category_id) {
         countQuery += ` AND category_id = $${countIndex}`;
         countParams.push(filters.category_id);
+        countIndex++;
+      }
+      if (filters.author_id) {
+        countQuery += ` AND author_id = $${countIndex}`;
+        countParams.push(filters.author_id);
         countIndex++;
       }
       if (filters.search) {
@@ -164,7 +176,8 @@ class CustomArticle {
         category_id,
         is_published,
         is_featured,
-        pub_date
+        pub_date,
+        author_id
       } = articleData;
 
       // Generate unique slug
@@ -190,8 +203,8 @@ class CustomArticle {
       const result = await pool.query(
         `INSERT INTO custom_articles (
           title, description, content, image_url, link, author,
-          source_name, category_id, is_published, is_featured, pub_date, slug
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+          source_name, category_id, is_published, is_featured, pub_date, slug, author_id
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
         RETURNING *`,
         [
           title,
@@ -205,7 +218,8 @@ class CustomArticle {
           is_published !== undefined ? is_published : true,
           is_featured !== undefined ? is_featured : false,
           pub_date || new Date(),
-          slug
+          slug,
+          author_id || null
         ]
       );
       return result.rows[0];

@@ -22,6 +22,11 @@ router.get('/', async (req, res) => {
     if (req.query.search) {
       filters.search = req.query.search;
     }
+    
+    // If user is kontributor, filter by author_id
+    if (req.user && req.user.role === 'kontributor') {
+      filters.author_id = req.user.id;
+    }
 
     const result = await CustomArticle.getAll(limit, offset, filters);
     res.json(result);
@@ -118,7 +123,8 @@ router.post('/', async (req, res) => {
       category_id,
       is_published,
       is_featured,
-      pub_date
+      pub_date,
+      author_id: req.user ? req.user.id : null // Set author_id to current user
     });
 
     res.status(201).json(article);
@@ -131,6 +137,14 @@ router.post('/', async (req, res) => {
 // PUT /api/custom-articles/:id - Update custom article
 router.put('/:id', async (req, res) => {
   try {
+    // Check if kontributor trying to edit someone else's article
+    if (req.user && req.user.role === 'kontributor') {
+      const existingArticle = await CustomArticle.getById(req.params.id);
+      if (!existingArticle || existingArticle.author_id !== req.user.id) {
+        return res.status(403).json({ error: 'You can only edit your own articles' });
+      }
+    }
+    
     const {
       title,
       description,
@@ -201,6 +215,14 @@ router.patch('/:id/toggle-featured', async (req, res) => {
 // DELETE /api/custom-articles/:id - Delete custom article
 router.delete('/:id', async (req, res) => {
   try {
+    // Check if kontributor trying to delete someone else's article
+    if (req.user && req.user.role === 'kontributor') {
+      const existingArticle = await CustomArticle.getById(req.params.id);
+      if (!existingArticle || existingArticle.author_id !== req.user.id) {
+        return res.status(403).json({ error: 'You can only delete your own articles' });
+      }
+    }
+    
     const article = await CustomArticle.delete(req.params.id);
     if (!article) {
       return res.status(404).json({ error: 'Article not found' });

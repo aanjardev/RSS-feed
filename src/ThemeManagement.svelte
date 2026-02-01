@@ -1,13 +1,48 @@
 <script>
   import { onMount } from 'svelte';
 
-  let API_BASE = '';
+  const API_BASE = import.meta.env.PROD 
+    ? (import.meta.env.VITE_API_URL || window.location.origin)
+    : 'http://localhost:4000';
   
-  onMount(() => {
-    API_BASE = window.location.hostname === 'localhost' 
-      ? 'http://localhost:3000'
-      : '';
+  let currentUser = $state(null);
+  
+  // Auth check
+  onMount(async () => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      window.location.href = '/admin';
+      return;
+    }
+    
+    // Get user info from localStorage
+    const userData = localStorage.getItem('admin_user');
+    if (userData) {
+      currentUser = JSON.parse(userData);
+    }
+    
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      
+      if (!response.ok) {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_user');
+        window.location.href = '/admin';
+      }
+    } catch (error) {
+      window.location.href = '/admin';
+    }
   });
+  
+  function handleLogout() {
+    localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
+    window.location.href = '/';
+  }
 
   let sliderColors = $state([]);
   let cardColors = $state([]);

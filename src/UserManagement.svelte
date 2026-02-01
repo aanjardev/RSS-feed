@@ -7,12 +7,26 @@
     ? (import.meta.env.VITE_API_URL || window.location.origin)
     : 'http://localhost:4000';
   
+  let currentUser = $state(null);
+  
   // Auth check
   onMount(async () => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       window.location.href = '/admin';
       return;
+    }
+    
+    // Get user info from localStorage
+    const userData = localStorage.getItem('admin_user');
+    if (userData) {
+      currentUser = JSON.parse(userData);
+    }
+    
+    // Get user info from localStorage
+    const userData = localStorage.getItem('admin_user');
+    if (userData) {
+      currentUser = JSON.parse(userData);
     }
     
     try {
@@ -381,7 +395,7 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="admin">Admin</option>
-              <option value="editor">Editor</option>
+              <option value="kontributor">Kontributor</option>
             </select>
           </div>
         </div>
