@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { cn } from './lib/utils';
+  import QuillEditor from './components/QuillEditor.svelte';
   
   const API_BASE = import.meta.env.PROD
     ? (import.meta.env.VITE_API_URL || window.location.origin)
@@ -345,16 +346,14 @@
                   </div>
                   
                 {:else if setting.type === 'text'}
-                  <!-- Textarea for long text/HTML content -->
-                  <textarea
-                    value={setting.value}
-                    onchange={(e) => updateSetting(setting.key, e.target.value)}
-                    rows="10"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
-                    disabled={saving}
-                    placeholder="Enter HTML content..."
-                  ></textarea>
-                  <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">Supports HTML tags</p>
+                  <!-- WYSIWYG Editor for long text/HTML content -->
+                  <div class="mt-2">
+                    <QuillEditor 
+                      value={setting.value}
+                      onChange={(html) => updateSetting(setting.key, html)}
+                    />
+                    <p class="mt-2 text-xs text-gray-500 dark:text-slate-400">Rich text editor with HTML support</p>
+                  </div>
                   
                 {:else}
                   <!-- Text Input -->
