@@ -196,17 +196,6 @@
           </a>
           {/if}
         </nav>
-          </a>
-          <a href="/admin/custom-articles" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
-            Articles
-          </a>
-          <a href="/admin/settings" class="px-3 py-2 text-sm font-medium text-gray-900 bg-gray-100 rounded-md">
-            Settings
-          </a>
-          <a href="/admin/users" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
-            Users
-          </a>
-        </nav>
       </div>
       <div class="flex items-center gap-2">
         <a href="/" class="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
