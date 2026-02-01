@@ -233,7 +233,6 @@
       });
       
       // Initialize visible count and loading state for each source
-      const itemsPerPage = settings.items_per_page || 10;
       newsSources.forEach((source) => {
         visibleCount[source.id] = itemsPerPage;
         loadingMore[source.id] = false;
