@@ -337,17 +337,6 @@
         <p class="text-sm opacity-80">
           {settings.footer_text || '© 2026 papua.news - Portal RSS Feed Berita Papua'}
         </p>
-        <div class="mt-2">
-          <button onclick={() => navigateTo('/terms')} class="text-sm text-primary hover:underline">
-            Syarat & Ketentuan
-          </button>
-          {#if settings.contact_email}
-          <span class="mx-2 opacity-50">•</span>
-          <a href="mailto:{settings.contact_email}" class="text-sm text-primary hover:underline">
-            Kontak
-          </a>
-          {/if}
-        </div>
       </div>
     </footer>
   {/if}

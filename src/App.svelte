@@ -871,18 +871,47 @@
           {/each}
         </ul>
 
-        <!-- About Link -->
-        <button
-          onclick={() => navigateTo('/about')}
-          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          Tentang Kami
-        </button>
+        <!-- Navigation Links -->
+        <div class="space-y-2">
+          <button
+            onclick={() => navigateTo('/about')}
+            class="btn btn-primary btn-block gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Tentang Kami
+          </button>
+          
+          <button
+            onclick={() => navigateTo('/terms')}
+            class="btn btn-ghost btn-block gap-2 border-2 border-neutral"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Syarat & Ketentuan
+          </button>
+          
+          {#if settings.contact_email}
+          <a
+            href="mailto:{settings.contact_email}"
+            class="btn btn-ghost btn-block gap-2 border-2 border-neutral"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Kontak
+          </a>
+          {/if}
+        </div>
       </div>
     </aside>
 
@@ -976,18 +1005,47 @@
           {/each}
         </ul>
 
-        <!-- About Link -->
-        <button
-          onclick={() => navigateTo('/about')}
-          class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          Tentang Kami
-        </button>
+        <!-- Navigation Links -->
+        <div class="space-y-2">
+          <button
+            onclick={() => navigateTo('/about')}
+            class="btn btn-primary btn-block gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Tentang Kami
+          </button>
+          
+          <button
+            onclick={() => navigateTo('/terms')}
+            class="btn btn-ghost btn-block gap-2 border-2 border-neutral"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Syarat & Ketentuan
+          </button>
+          
+          {#if settings.contact_email}
+          <a
+            href="mailto:{settings.contact_email}"
+            class="btn btn-ghost btn-block gap-2 border-2 border-neutral"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Kontak
+          </a>
+          {/if}
+        </div>
       </div>
     </aside>
 
@@ -1016,17 +1074,6 @@
       <p class="text-sm opacity-80">
         {settings.footer_text || '© 2026 papua.news - Portal RSS Feed Berita Papua'}
       </p>
-      <div class="mt-2">
-        <button onclick={() => navigateTo('/terms')} class="text-sm text-primary hover:underline">
-          Syarat & Ketentuan
-        </button>
-        {#if settings.contact_email}
-        <span class="mx-2 opacity-50">•</span>
-        <a href="mailto:{settings.contact_email}" class="text-sm text-primary hover:underline">
-          Kontak
-        </a>
-        {/if}
-      </div>
     </div>
   </footer>
 </div>
