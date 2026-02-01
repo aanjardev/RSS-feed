@@ -15,8 +15,21 @@
   let guestName = $state('');
   let submittingComment = $state(false);
   let showShareMenu = $state(false);
+  let settings = $state({});
+  
+  async function loadSettings() {
+    try {
+      const response = await fetch(`${API_BASE}/api/settings/public`);
+      if (response.ok) {
+        settings = await response.json();
+      }
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  }
   
   onMount(async () => {
+    await loadSettings();
     await loadArticle();
     await loadComments();
   });
@@ -322,12 +335,18 @@
     <footer class="bg-base-200 border-t-2 border-neutral py-4 mt-12">
       <div class="container mx-auto px-4 text-center">
         <p class="text-sm opacity-80">
-          © 2026 papua.news - Portal RSS Feed Berita Papua
+          {settings.footer_text || '© 2026 papua.news - Portal RSS Feed Berita Papua'}
         </p>
         <div class="mt-2">
           <button onclick={() => navigateTo('/terms')} class="text-sm text-primary hover:underline">
             Syarat & Ketentuan
           </button>
+          {#if settings.contact_email}
+          <span class="mx-2 opacity-50">•</span>
+          <a href="mailto:{settings.contact_email}" class="text-sm text-primary hover:underline">
+            Kontak
+          </a>
+          {/if}
         </div>
       </div>
     </footer>
