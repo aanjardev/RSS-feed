@@ -158,7 +158,7 @@
 
   <!-- Footer -->
   <footer class="bg-base-200 border-t-2 border-neutral py-4 mt-12">
-    <div class="container mx-auto px-4 text-center">
+    <div class="container mx-auto px-4 text-right">
       <p class="text-sm opacity-80">
         {settings.footer_text || '© 2026 papua.news - Portal RSS Feed Berita Papua'}
       </p>

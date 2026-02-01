@@ -4,7 +4,7 @@ const API_BASE_URL = import.meta.env.PROD
   : 'http://localhost:4000';
 
 // Fetch articles from backend API (not direct RSS)
-export async function fetchArticlesBySource(sourceId, limit = 10, offset = 0) {
+export async function fetchArticlesBySource(sourceId, limit = 6, offset = 0) {
   try {
     const response = await fetch(`${API_BASE_URL}/api/articles?source_id=${sourceId}&limit=${limit}&offset=${offset}`);
 
