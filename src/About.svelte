@@ -141,6 +141,9 @@
                 <span>Jayapura, Papua</span>
               </div>
             </div>
+          </div>
+        </section>
+
       <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8">
         <h2 class="text-3xl font-bold mb-4">⚖️ Disclaimer</h2>
         <div class="bg-warning/10 p-6 rounded-lg border-2 border-warning">
