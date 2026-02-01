@@ -186,9 +186,10 @@
       const sourcesData = await fetchAllSources();
       
       // Then fetch articles for each source
+      const itemsPerPage = settings.items_per_page || 10;
       const results = await Promise.all(
         sourcesData.sources.map(async (source) => {
-          const data = await fetchArticlesBySource(source.id, 11); // Load 11 initial articles
+          const data = await fetchArticlesBySource(source.id, itemsPerPage);
           return {
             id: source.id,
             name: source.name,
@@ -214,8 +215,8 @@
               }),
               pubDate: article.pub_date
             })),
-            hasMore: data.count >= 11,
-            skip: 11,
+            hasMore: data.count >= itemsPerPage,
+            skip: itemsPerPage,
           };
         })
       );
@@ -232,8 +233,9 @@
       });
       
       // Initialize visible count and loading state for each source
+      const itemsPerPage = settings.items_per_page || 10;
       newsSources.forEach((source) => {
-        visibleCount[source.id] = 11;
+        visibleCount[source.id] = itemsPerPage;
         loadingMore[source.id] = false;
       });
       
@@ -265,9 +267,10 @@
     const source = newsSources.find(s => s.id === sourceId);
     if (!source || !source.hasMore || loadingMore[sourceId]) return;
     
+    const itemsPerPage = settings.items_per_page || 10;
     loadingMore[sourceId] = true;
     try {
-      const data = await fetchArticlesBySource(sourceId, 11, source.skip);
+      const data = await fetchArticlesBySource(sourceId, itemsPerPage, source.skip);
       
       const newArticles = data.articles.map((article) => ({
         id: article.id,
@@ -292,14 +295,14 @@
           return {
             ...s,
             news: [...s.news, ...newArticles],
-            hasMore: data.count >= 11,
+            hasMore: data.count >= itemsPerPage,
             skip: s.skip + data.count,
           };
         }
         return s;
       });
       
-      visibleCount = { ...visibleCount, [sourceId]: visibleCount[sourceId] + 11 };
+      visibleCount = { ...visibleCount, [sourceId]: visibleCount[sourceId] + itemsPerPage };
     } catch (error) {
       console.error('Error loading more articles:', error);
     } finally {
