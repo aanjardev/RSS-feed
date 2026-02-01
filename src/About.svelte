@@ -107,8 +107,11 @@
           </section>
         </div>
       {/if}
+    </article>
 
-      <section>
+    <!-- Additional Sections -->
+    <div class="mt-8 space-y-8">
+      <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8">
         <h2 class="text-3xl font-bold mb-4">🤝 Kontak & Kerjasama</h2>
           <p class="text-lg leading-relaxed">
             Untuk pertanyaan, saran, atau kerjasama media, silakan hubungi kami:
@@ -138,30 +141,26 @@
                 <span>Jayapura, Papua</span>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 class="text-3xl font-bold mb-4">⚖️ Disclaimer</h2>
-          <div class="bg-warning/10 p-6 rounded-lg border-2 border-warning">
-            <p class="text-lg leading-relaxed">
-              Papua.news adalah agregator berita yang mengumpulkan konten dari berbagai sumber eksternal. 
-              Kami tidak bertanggung jawab atas akurasi, validitas, atau pandangan yang diungkapkan dalam 
-              artikel dari sumber eksternal. Untuk informasi lebih lanjut, silakan kunjungi sumber asli artikel.
-            </p>
-          </div>
-        </section>
-
-        <section class="text-center pt-8 border-t-4 border-neutral">
-          <p class="text-2xl font-bold">
-            🏔️ Tanah Papua, Tanah Cinta 🏔️
+      <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8">
+        <h2 class="text-3xl font-bold mb-4">⚖️ Disclaimer</h2>
+        <div class="bg-warning/10 p-6 rounded-lg border-2 border-warning">
+          <p class="text-lg leading-relaxed">
+            Papua.news adalah agregator berita yang mengumpulkan konten dari berbagai sumber eksternal. 
+            Kami tidak bertanggung jawab atas akurasi, validitas, atau pandangan yang diungkapkan dalam 
+            artikel dari sumber eksternal. Untuk informasi lebih lanjut, silakan kunjungi sumber asli artikel.
           </p>
-          <p class="text-lg mt-2 text-base-content/70">
-            Bersama membangun Papua yang lebih baik melalui informasi
-          </p>
-        </section>
-      </div>
-    </article>
+        </div>
+      </section>
+
+      <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8 text-center">
+        <p class="text-2xl font-bold">
+          🏔️ Tanah Papua, Tanah Cinta 🏔️
+        </p>
+        <p class="text-lg mt-2 text-base-content/70">
+          Bersama membangun Papua yang lebih baik melalui informasi
+        </p>
+      </section>
+    </div>
   </main>
 
   <!-- Footer -->
