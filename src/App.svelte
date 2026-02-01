@@ -222,15 +222,19 @@
       );
       newsSources = results.filter(source => source.news.length > 0);
       
-      // Sort sources: custom articles (papua.news, Editorial) first
-      newsSources = newsSources.sort((a, b) => {
-        const aIsCustom = a.is_custom || a.name === 'papua.news' || a.name.includes('Editorial');
-        const bIsCustom = b.is_custom || b.name === 'papua.news' || b.name.includes('Editorial');
-        
-        if (aIsCustom && !bIsCustom) return -1;
-        if (!aIsCustom && bIsCustom) return 1;
-        return 0; // Keep original order for same type
-      });
+      // Separate papua.news and randomize others
+      const papuaNewsSource = newsSources.find(s => 
+        s.is_custom || s.name.toLowerCase().includes('papua.news') || s.name.includes('Editorial')
+      );
+      const otherSources = newsSources.filter(s => 
+        !(s.is_custom || s.name.toLowerCase().includes('papua.news') || s.name.includes('Editorial'))
+      );
+      
+      // Randomize other sources
+      const randomizedSources = shuffleArray(otherSources);
+      
+      // Reconstruct: papua.news first, then randomized sources
+      newsSources = papuaNewsSource ? [papuaNewsSource, ...randomizedSources] : randomizedSources;
       
       // Initialize visible count and loading state for each source
       newsSources.forEach((source) => {
@@ -389,6 +393,19 @@
   let filteredSources = $derived(newsSources.filter((source) =>
     source.name.toLowerCase().includes(searchQuery.toLowerCase())
   ));
+  
+  // Display sources: papua.news first, randomized middle, About card last
+  let displaySources = $derived([
+    ...newsSources,
+    {
+      id: 'about-card',
+      name: 'Tentang Kami',
+      sub: 'Informasi tentang Papua.News',
+      logo: settings.logo_url || fallbackLogo,
+      isAboutCard: true,
+      news: []
+    }
+  ]);
 </script>
 
 <div class="min-h-screen {bodyBgColor} text-neutral overflow-hidden flex flex-col">
@@ -619,9 +636,61 @@
       <div
         class="mx-auto w-full max-w-[1280px] grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
       >
-        {#each newsSources as source, sourceIdx}
+        {#each displaySources as source, sourceIdx}
           {@const shown = visibleCount[source.id] ?? 11}
           {@const logoUrl = source.logo || fallbackLogo}
+          
+          {#if source.isAboutCard}
+          <!-- About Card -->
+          <div
+            id="source-about"
+            class="card card-bordered border-2 border-black/15 bg-gradient-to-br from-primary/10 via-primary/5 to-base-200 h-full min-h-0 shadow-[2px_2px_0_rgba(0,0,0,0.08)]"
+          >
+            <div class="px-3 py-3 sticky top-0 bg-primary/10 border-b border-black/15">
+              <div class="flex items-center gap-2">
+                <img
+                  src={logoUrl}
+                  alt="Tentang Kami"
+                  width="48"
+                  height="48"
+                  class="w-12 h-12 object-cover"
+                  loading="lazy"
+                />
+                <div class="min-w-0">
+                  <h2 class="card-title leading-tight text-base font-black">
+                    Tentang Kami
+                  </h2>
+                  <p class="text-xs opacity-70 truncate mt-1">Papua.News</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex-1 flex flex-col items-center justify-center px-6 py-12 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-6 text-primary">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              
+              <h3 class="text-xl font-bold mb-3">Tentang Papua.News</h3>
+              <p class="text-sm opacity-80 leading-relaxed mb-6">
+                Portal berita agregator yang menyajikan informasi terkini dari berbagai sumber berita terpercaya di Papua.
+              </p>
+              
+              <button
+                onclick={() => navigateTo('/about')}
+                class="btn btn-primary gap-2 shadow-[4px_4px_0_#111] hover:shadow-[2px_2px_0_#111] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14"/>
+                  <path d="m12 5 7 7-7 7"/>
+                </svg>
+                Selengkapnya
+              </button>
+            </div>
+          </div>
+          {:else}
+          <!-- Regular Source Card -->
           <div
             id="source-{source.id}"
             class="card card-bordered border-2 border-black/15 bg-base-200 h-full min-h-0 shadow-[2px_2px_0_rgba(0,0,0,0.08)]"
@@ -728,6 +797,7 @@
               {/if}
             </div>
           </div>
+          {/if}
         {/each}
       </div>
       {/if}
