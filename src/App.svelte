@@ -844,7 +844,7 @@
         </label>
 
         <ul
-          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-320px)] overflow-y-auto"
+          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-480px)] overflow-y-auto"
         >
           {#each filteredSources as source (source.id)}
             <li>
@@ -976,7 +976,7 @@
         </label>
 
         <ul
-          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-320px)] overflow-y-auto"
+          class="menu flex flex-col flex-nowrap flex-1 gap-1 w-full pr-1 max-h-[calc(100vh-480px)] overflow-y-auto"
         >
           {#each filteredSources as source (source.id)}
             <li>
@@ -1069,7 +1069,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-base-200 border-t-2 border-neutral py-4">
+  <footer class="bg-base-200 border-t-2 border-neutral py-4 relative z-0">
     <div class="container mx-auto px-4 text-right">
       <p class="text-sm opacity-80">
         {settings.footer_text || '© 2026 papua.news - Portal RSS Feed Berita Papua'}
