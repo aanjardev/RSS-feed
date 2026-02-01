@@ -54,50 +54,59 @@
         Tentang Papua.news
       </h1>
       
-      <!-- Content -->
-      <div class="prose prose-lg max-w-none space-y-6">
-        <section>
-          <h2 class="text-3xl font-bold mb-4">🌏 Siapa Kami</h2>
-          <p class="text-lg leading-relaxed">
-            <strong>Papua.news</strong> adalah platform agregator berita yang fokus menghadirkan informasi terkini 
-            seputar Papua dan Indonesia Timur. Kami mengumpulkan berita dari berbagai sumber terpercaya 
-            dan menyajikannya dalam satu tempat yang mudah diakses.
-          </p>
-        </section>
+      <!-- Dynamic Content from Settings -->
+      {#if settings.about_content}
+        <div class="prose prose-lg max-w-none space-y-6">
+          {@html settings.about_content}
+        </div>
+      {:else}
+        <!-- Fallback Content -->
+        <div class="prose prose-lg max-w-none space-y-6">
+          <section>
+            <h2 class="text-3xl font-bold mb-4">🌏 Siapa Kami</h2>
+            <p class="text-lg leading-relaxed">
+              <strong>Papua.news</strong> adalah platform agregator berita yang fokus menghadirkan informasi terkini 
+              seputar Papua dan Indonesia Timur. Kami mengumpulkan berita dari berbagai sumber terpercaya 
+              dan menyajikannya dalam satu tempat yang mudah diakses.
+            </p>
+          </section>
 
-        <section>
-          <h2 class="text-3xl font-bold mb-4">🎯 Misi Kami</h2>
-          <ul class="list-disc list-inside space-y-2 text-lg">
-            <li>Menyediakan akses mudah ke berita Papua dan Indonesia Timur</li>
-            <li>Menghadirkan perspektif yang beragam dari berbagai sumber media</li>
-            <li>Membantu masyarakat Papua tetap terinformasi tentang perkembangan daerah mereka</li>
-            <li>Menjadi jembatan informasi antara Papua dan dunia luar</li>
-          </ul>
-        </section>
+          <section>
+            <h2 class="text-3xl font-bold mb-4">🎯 Misi Kami</h2>
+            <ul class="list-disc list-inside space-y-2 text-lg">
+              <li>Menyediakan akses mudah ke berita Papua dan Indonesia Timur</li>
+              <li>Menghadirkan perspektif yang beragam dari berbagai sumber media</li>
+              <li>Membantu masyarakat Papua tetap terinformasi tentang perkembangan daerah mereka</li>
+              <li>Menjadi jembatan informasi antara Papua dan dunia luar</li>
+            </ul>
+          </section>
 
-        <section>
-          <h2 class="text-3xl font-bold mb-4">📰 Konten Kami</h2>
-          <p class="text-lg leading-relaxed">
-            Kami mengkurasi berita dari berbagai kategori:
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div class="bg-primary/10 p-4 rounded-lg border-2 border-primary">
-              <h3 class="font-bold text-xl mb-2">🏛️ Politik & Pemerintahan</h3>
-              <p>Otonomi khusus, kebijakan daerah, dan perkembangan politik</p>
+          <section>
+            <h2 class="text-3xl font-bold mb-4">📰 Konten Kami</h2>
+            <p class="text-lg leading-relaxed">
+              Kami mengkurasi berita dari berbagai kategori:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div class="bg-primary/10 p-4 rounded-lg border-2 border-primary">
+                <h3 class="font-bold text-xl mb-2">🏛️ Politik & Pemerintahan</h3>
+                <p>Otonomi khusus, kebijakan daerah, dan perkembangan politik</p>
+              </div>
+              <div class="bg-secondary/10 p-4 rounded-lg border-2 border-secondary">
+                <h3 class="font-bold text-xl mb-2">💼 Ekonomi & Bisnis</h3>
+                <p>Investasi, UMKM, dan perkembangan ekonomi Papua</p>
+              </div>
+              <div class="bg-accent/10 p-4 rounded-lg border-2 border-accent">
+                <h3 class="font-bold text-xl mb-2">🎭 Budaya & Sosial</h3>
+                <p>Kearifan lokal, seni, dan kehidupan masyarakat Papua</p>
+              </div>
+              <div class="bg-info/10 p-4 rounded-lg border-2 border-info">
+                <h3 class="font-bold text-xl mb-2">🏥 Kesehatan & Pendidikan</h3>
+                <p>Layanan kesehatan, pendidikan, dan kesejahteraan</p>
+              </div>
             </div>
-            <div class="bg-secondary/10 p-4 rounded-lg border-2 border-secondary">
-              <h3 class="font-bold text-xl mb-2">💼 Ekonomi & Bisnis</h3>
-              <p>Investasi, UMKM, dan perkembangan ekonomi Papua</p>
-            </div>
-            <div class="bg-accent/10 p-4 rounded-lg border-2 border-accent">
-              <h3 class="font-bold text-xl mb-2">🎭 Budaya & Sosial</h3>
-              <p>Kearifan lokal, seni, dan kehidupan masyarakat Papua</p>
-            </div>
-            <div class="bg-info/10 p-4 rounded-lg border-2 border-info">
-              <h3 class="font-bold text-xl mb-2">🏥 Kesehatan & Pendidikan</h3>
-              <p>Layanan kesehatan, pendidikan, dan kesejahteraan</p>
-            </div>
-          </div>
+          </section>
+        </div>
+      {/if}
         </section>
 
         <section>

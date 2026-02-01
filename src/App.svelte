@@ -186,10 +186,10 @@
       const sourcesData = await fetchAllSources();
       
       // Then fetch articles for each source
-      const itemsPerPage = settings.items_per_page || 10;
+      const articlesPerSource = settings.articles_per_source || 10;
       const results = await Promise.all(
         sourcesData.sources.map(async (source) => {
-          const data = await fetchArticlesBySource(source.id, itemsPerPage);
+          const data = await fetchArticlesBySource(source.id, articlesPerSource);
           return {
             id: source.id,
             name: source.name,
@@ -215,8 +215,8 @@
               }),
               pubDate: article.pub_date
             })),
-            hasMore: data.count >= itemsPerPage,
-            skip: itemsPerPage,
+            hasMore: data.count >= articlesPerSource,
+            skip: articlesPerSource,
           };
         })
       );
@@ -238,7 +238,7 @@
       
       // Initialize visible count and loading state for each source
       newsSources.forEach((source) => {
-        visibleCount[source.id] = itemsPerPage;
+        visibleCount[source.id] = articlesPerSource;
         loadingMore[source.id] = false;
       });
       
@@ -270,10 +270,10 @@
     const source = newsSources.find(s => s.id === sourceId);
     if (!source || !source.hasMore || loadingMore[sourceId]) return;
     
-    const itemsPerPage = settings.items_per_page || 10;
+    const articlesPerSource = settings.articles_per_source || 10;
     loadingMore[sourceId] = true;
     try {
-      const data = await fetchArticlesBySource(sourceId, itemsPerPage, source.skip);
+      const data = await fetchArticlesBySource(sourceId, articlesPerSource, source.skip);
       
       const newArticles = data.articles.map((article) => ({
         id: article.id,
@@ -298,14 +298,14 @@
           return {
             ...s,
             news: [...s.news, ...newArticles],
-            hasMore: data.count >= itemsPerPage,
+            hasMore: data.count >= articlesPerSource,
             skip: s.skip + data.count,
           };
         }
         return s;
       });
       
-      visibleCount = { ...visibleCount, [sourceId]: visibleCount[sourceId] + itemsPerPage };
+      visibleCount = { ...visibleCount, [sourceId]: visibleCount[sourceId] + articlesPerSource };
     } catch (error) {
       console.error('Error loading more articles:', error);
     } finally {
@@ -719,7 +719,7 @@
 
             <!-- List Berita -->
             <div class="flex-1 overflow-y-auto px-3 py-4 space-y-4 bg-base-200">
-              {#each source.news.slice(0, shown || settings.items_per_page || 6) as item, idx}
+              {#each source.news.slice(0, shown || settings.articles_per_source || 10) as item, idx}
                 <a
                   href={item.link || '#'}
                   target="_blank"

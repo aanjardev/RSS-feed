@@ -9,8 +9,8 @@ import UserManagement from './UserManagement.svelte'
 import CustomArticlesManagement from './CustomArticlesManagement.svelte'
 import ArticlePage from './ArticlePage.svelte'
 import About from './About.svelte'
+import Terms from './Terms.svelte'
 import ThemeManagement from './ThemeManagement.svelte'
-import TermsOfService from './TermsOfService.svelte'
 import { mount } from 'svelte'
 import { loadSiteMetadata } from './lib/faviconLoader.js'
 
@@ -55,7 +55,7 @@ function router() {
   const routes = {
     '/': App,
     '/about': About,
-    '/terms': TermsOfService,
+    '/terms': Terms,
     '/admin': Login,
     '/admin/dashboard': Admin,
     '/admin/categories': CategoryManagement,
