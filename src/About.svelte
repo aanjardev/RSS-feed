@@ -113,45 +113,41 @@
     <div class="mt-8 space-y-8">
       <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8">
         <h2 class="text-3xl font-bold mb-4">🤝 Kontak & Kerjasama</h2>
-          <p class="text-lg leading-relaxed">
-            Untuk pertanyaan, saran, atau kerjasama media, silakan hubungi kami:
-          </p>
-          <div class="bg-base-200 p-6 rounded-lg border-2 border-neutral mt-4">
-            <div class="space-y-3">
-              <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                <span class="font-semibold">Email:</span>
-                <a href="mailto:info@papua.news" class="text-primary hover:underline">info@papua.news</a>
-              </div>
-              <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-                <span class="font-semibold">WhatsApp:</span>
-                <a href="https://wa.me/6281234567890" class="text-primary hover:underline" target="_blank">+62 812-3456-7890</a>
-              </div>
-              <div class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
-                  <path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path>
-                </svg>
-                <span class="font-semibold">Location:</span>
-                <span>Jayapura, Papua</span>
-              </div>
+        <p class="text-lg leading-relaxed">
+          Untuk pertanyaan, saran, atau kerjasama media, silakan hubungi kami:
+        </p>
+        <div class="bg-base-200 p-6 rounded-lg border-2 border-neutral mt-4">
+          <div class="space-y-3">
+            {#if settings.contact_email}
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span class="font-semibold">Email:</span>
+              <a href="mailto:{settings.contact_email}" class="text-primary hover:underline">{settings.contact_email}</a>
             </div>
+            {/if}
+            {#if settings.contact_phone}
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span class="font-semibold">WhatsApp:</span>
+              <a href="https://wa.me/{settings.contact_phone.replace(/[^0-9]/g, '')}" class="text-primary hover:underline" target="_blank">{settings.contact_phone}</a>
+            </div>
+            {/if}
+            {#if settings.contact_location}
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span class="font-semibold">Location:</span>
+              <span>{settings.contact_location}</span>
+            </div>
+            {/if}
           </div>
-        </section>
-
-      <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8">
-        <h2 class="text-3xl font-bold mb-4">⚖️ Disclaimer</h2>
-        <div class="bg-warning/10 p-6 rounded-lg border-2 border-warning">
-          <p class="text-lg leading-relaxed">
-            Papua.news adalah agregator berita yang mengumpulkan konten dari berbagai sumber eksternal. 
-            Kami tidak bertanggung jawab atas akurasi, validitas, atau pandangan yang diungkapkan dalam 
-            artikel dari sumber eksternal. Untuk informasi lebih lanjut, silakan kunjungi sumber asli artikel.
-          </p>
         </div>
       </section>
 
