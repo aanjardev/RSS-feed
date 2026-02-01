@@ -12,12 +12,19 @@ import About from './About.svelte'
 import ThemeManagement from './ThemeManagement.svelte'
 import TermsOfService from './TermsOfService.svelte'
 import { mount } from 'svelte'
+import { loadSiteMetadata } from './lib/faviconLoader.js'
+
+// Load favicon and site title from database on app start
+loadSiteMetadata();
 
 // Simple client-side router
 function router() {
   const path = window.location.pathname
   const root = document.getElementById('root')
   root.innerHTML = ''
+  
+  // Reload favicon on route change (in case settings changed)
+  loadSiteMetadata();
   
   // Match article page route /artikel/:slug
   const articlePageMatch = path.match(/^\/artikel\/([a-z0-9-]+)$/)

@@ -167,17 +167,35 @@
 </script>
 
 <!-- Navbar -->
-<div class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+<div class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center space-x-8">
-        <h1 class="text-xl font-bold text-gray-900">Admin Dashboard</h1>
+        <h1 class="text-xl font-bold text-gray-900 dark:text-slate-100">Admin Dashboard</h1>
         <nav class="flex space-x-4">
-          <a href="/admin/dashboard" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+          {#if currentUser?.role === 'admin'}
+          <a href="/admin/dashboard" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors">
             RSS Sources
           </a>
-          <a href="/admin/categories" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+          <a href="/admin/categories" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors">
             Categories
+          </a>
+          {/if}
+          <a href="/admin/custom-articles" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors">
+            Artikel
+          </a>
+          {#if currentUser?.role === 'admin'}
+          <a href="/admin/settings" class="px-3 py-2 text-sm font-medium text-gray-900 bg-gray-100 dark:text-slate-100 dark:bg-slate-800 rounded-md">
+            Settings
+          </a>
+          <a href="/admin/theme" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors">
+            Theme
+          </a>
+          <a href="/admin/users" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors">
+            Users
+          </a>
+          {/if}
+        </nav>
           </a>
           <a href="/admin/custom-articles" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
             Articles
@@ -191,12 +209,12 @@
         </nav>
       </div>
       <div class="flex items-center gap-2">
-        <a href="/" class="text-sm font-medium text-blue-600 hover:text-blue-700">
+        <a href="/" class="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
           ← Home
         </a>
         <button
           onclick={handleLogout}
-          class="text-sm font-medium text-red-600 hover:text-red-700 px-3 py-2 rounded-md hover:bg-red-50 transition-colors"
+          class="text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 px-3 py-2 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
         >
           Logout
         </button>
@@ -205,7 +223,7 @@
   </div>
 </div>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
   <!-- Notification -->
   {#if notification.show}
     <div class={cn(
@@ -218,17 +236,17 @@
 
   <!-- Header -->
   <div class="mb-8">
-    <h2 class="text-3xl font-bold text-gray-900 mb-2">Settings</h2>
-    <p class="text-gray-600">Manage your site configuration and preferences</p>
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">Settings</h2>
+    <p class="text-gray-600 dark:text-slate-400">Manage your site configuration and preferences</p>
   </div>
 
   {#if loading}
     <div class="flex justify-center items-center py-12">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400"></div>
     </div>
   {:else}
     <!-- Category Tabs -->
-    <div class="mb-6 border-b border-gray-200">
+    <div class="mb-6 border-b border-gray-200 dark:border-slate-700">
       <nav class="flex space-x-8">
         {#each categories as category}
           <button
@@ -236,8 +254,8 @@
             class={cn(
               "py-4 px-1 border-b-2 font-medium text-sm transition-colors",
               activeCategory === category.value
-                ? "border-blue-600 text-blue-600"
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                ? "border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400"
+                : "border-transparent text-gray-500 hover:text-gray-700 dark:text-slate-400 dark:hover:text-slate-300 hover:border-gray-300 dark:hover:border-slate-600"
             )}
           >
             {category.label}
@@ -247,17 +265,17 @@
     </div>
 
     <!-- Settings Form -->
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden">
       <div class="p-6 space-y-6">
         {#each getCategorySettings(activeCategory) as setting (setting.key)}
-          <div class="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+          <div class="border-b border-gray-100 dark:border-slate-700 pb-6 last:border-b-0 last:pb-0">
             <div class="flex items-start justify-between">
               <div class="flex-1">
-                <div class="block text-sm font-semibold text-gray-900 mb-1">
+                <div class="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-1">
                   {setting.label}
                 </div>
                 {#if setting.description}
-                  <p class="text-sm text-gray-500 mb-3">{setting.description}</p>
+                  <p class="text-sm text-gray-500 dark:text-slate-400 mb-3">{setting.description}</p>
                 {/if}
                 
                 <!-- Input based on type -->
@@ -267,7 +285,7 @@
                     onclick={() => updateSetting(setting.key, setting.value !== 'true')}
                     class={cn(
                       "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
-                      setting.value === 'true' ? 'bg-blue-600' : 'bg-gray-200'
+                      setting.value === 'true' ? 'bg-blue-600 dark:bg-blue-500' : 'bg-gray-200 dark:bg-slate-600'
                     )}
                     role="switch"
                     aria-checked={setting.value === 'true'}
@@ -280,7 +298,7 @@
                       )}
                     ></span>
                   </button>
-                  <span class="ml-3 text-sm text-gray-600">
+                  <span class="ml-3 text-sm text-gray-600 dark:text-slate-400">
                     {setting.value === 'true' ? 'Enabled' : 'Disabled'}
                   </span>
                   
@@ -290,7 +308,7 @@
                     type="number"
                     value={setting.value}
                     onchange={(e) => updateSetting(setting.key, e.target.value)}
-                    class="mt-1 block w-full max-w-xs px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="mt-1 block w-full max-w-xs px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     disabled={saving}
                   />
                   
@@ -302,15 +320,15 @@
                         <img 
                           src={setting.value} 
                           alt="Preview" 
-                          class="h-10 w-10 object-contain rounded border border-gray-200"
+                          class="h-10 w-10 object-contain rounded border border-gray-200 dark:border-slate-600"
                           onerror={(e) => e.target.style.display = 'none'}
                         />
-                        <span class="text-sm text-gray-600">{setting.value}</span>
+                        <span class="text-sm text-gray-600 dark:text-slate-400">{setting.value}</span>
                       </div>
                     {/if}
                     <div>
                       <label class={cn(
-                        "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 cursor-pointer transition-colors",
+                        "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-slate-300 bg-white dark:bg-slate-700 hover:bg-gray-50 dark:hover:bg-slate-600 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 cursor-pointer transition-colors",
                         uploadingFiles[setting.key] && "opacity-50 cursor-not-allowed"
                       )}>
                         {#if uploadingFiles[setting.key]}
@@ -320,7 +338,7 @@
                           </svg>
                           Uploading...
                         {:else}
-                          <svg class="-ml-1 mr-2 h-4 w-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg class="-ml-1 mr-2 h-4 w-4 text-gray-700 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                           </svg>
                           Choose File
@@ -333,7 +351,7 @@
                           disabled={uploadingFiles[setting.key]}
                         />
                       </label>
-                      <p class="mt-1 text-xs text-gray-500">PNG, JPG, ICO, SVG up to 2MB</p>
+                      <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">PNG, JPG, ICO, SVG up to 2MB</p>
                     </div>
                   </div>
                   
@@ -343,7 +361,7 @@
                     type="text"
                     value={setting.value}
                     onchange={(e) => updateSetting(setting.key, e.target.value)}
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     disabled={saving}
                   />
                 {/if}
@@ -351,7 +369,7 @@
               
               <!-- Key Badge -->
               <div class="ml-4">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 font-mono">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-slate-300 font-mono">
                   {setting.key}
                 </span>
               </div>
@@ -360,7 +378,7 @@
         {/each}
         
         {#if getCategorySettings(activeCategory).length === 0}
-          <div class="text-center py-12 text-gray-500">
+          <div class="text-center py-12 text-gray-500 dark:text-slate-400">
             No settings in this category
           </div>
         {/if}
