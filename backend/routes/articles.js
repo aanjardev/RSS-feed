@@ -140,6 +140,11 @@ router.get('/sources', async (req, res) => {
     
     const customResult = await pool.query(customQuery);
     
+    // Get favicon from settings for custom sources
+    const faviconQuery = `SELECT value FROM settings WHERE key = 'favicon_url' LIMIT 1`;
+    const faviconResult = await pool.query(faviconQuery);
+    const faviconUrl = faviconResult.rows[0]?.value || null;
+    
     // Combine sources - add custom sources with custom ID using base64 encoding
     const allSources = [
       ...rssResult.rows,
@@ -147,7 +152,7 @@ router.get('/sources', async (req, res) => {
         id: `custom-${Buffer.from(cs.name).toString('base64')}`,
         name: cs.name,
         url: null,
-        logo: null,
+        logo: faviconUrl,
         description: null,
         category: 'Editorial',
         article_count: parseInt(cs.article_count),
