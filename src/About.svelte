@@ -107,10 +107,9 @@
           </section>
         </div>
       {/if}
-        </section>
 
-        <section>
-          <h2 class="text-3xl font-bold mb-4">🤝 Kontak & Kerjasama</h2>
+      <section>
+        <h2 class="text-3xl font-bold mb-4">🤝 Kontak & Kerjasama</h2>
           <p class="text-lg leading-relaxed">
             Untuk pertanyaan, saran, atau kerjasama media, silakan hubungi kami:
           </p>
