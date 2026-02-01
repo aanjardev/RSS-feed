@@ -71,9 +71,9 @@ app.get('/health', (req, res) => {
 
 // Fallback route for SPA - serve index.html for all non-API routes
 app.get('*', (req, res) => {
-  // Don't serve index.html for API routes
-  if (req.path.startsWith('/api/')) {
-    return res.status(404).json({ error: 'API endpoint not found' });
+  // Don't serve index.html for API routes and static assets
+  if (req.path.startsWith('/api/') || req.path.startsWith('/assets/')) {
+    return res.status(404).json({ error: 'Not found' });
   }
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });

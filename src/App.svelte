@@ -19,6 +19,23 @@
   let loadingMore = $state({});
   let settings = $state({});
 
+  // Helper function to convert relative image URL to absolute URL
+  function getImageUrl(imageUrl) {
+    if (!imageUrl) return null;
+    
+    // If already absolute URL (starts with http:// or https://), return as is
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      return imageUrl;
+    }
+    
+    // If relative URL (starts with /), prepend API base URL
+    const API_BASE = import.meta.env.PROD
+      ? (import.meta.env.VITE_API_URL || window.location.origin)
+      : 'http://localhost:3000';
+    
+    return `${API_BASE}${imageUrl}`;
+  }
+
   // Load public settings
   async function loadSettings() {
     try {
@@ -184,7 +201,7 @@
               id: article.id,
               title: article.title,
               desc: article.description || '',
-              image: article.image_url || null,
+              image: getImageUrl(article.image_url),
               link: article.link,
               slug: article.slug,
               is_custom: article.is_custom || false,
@@ -256,7 +273,7 @@
         id: article.id,
         title: article.title,
         desc: article.description || '',
-        image: article.image_url || null,
+        image: getImageUrl(article.image_url),
         link: article.link,
         slug: article.slug,
         is_custom: article.is_custom || false,
