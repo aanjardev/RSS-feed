@@ -8,6 +8,19 @@
     : 'http://localhost:4000';
   
   let currentUser = $state(null);
+  let users = $state([]);
+  let loading = $state(true);
+  let showModal = $state(false);
+  let modalMode = $state('add');
+  let editingUser = $state(null);
+  let notification = $state({ show: false, message: '', type: '' });
+  
+  let formData = $state({
+    name: '',
+    email: '',
+    password: '',
+    role: 'admin'
+  });
   
   // Auth check
   onMount(async () => {
@@ -15,12 +28,6 @@
     if (!token) {
       window.location.href = '/admin';
       return;
-    }
-    
-    // Get user info from localStorage
-    const userData = localStorage.getItem('admin_user');
-    if (userData) {
-      currentUser = JSON.parse(userData);
     }
     
     // Get user info from localStorage
@@ -43,6 +50,8 @@
     } catch (error) {
       window.location.href = '/admin';
     }
+    
+    loadUsers();
   });
   
   function handleLogout() {
@@ -50,24 +59,6 @@
     localStorage.removeItem('admin_user');
     window.location.href = '/';
   }
-  
-  let users = $state([]);
-  let loading = $state(true);
-  let showModal = $state(false);
-  let modalMode = $state('add');
-  let currentUser = $state(null);
-  let notification = $state({ show: false, message: '', type: '' });
-  
-  let formData = $state({
-    name: '',
-    email: '',
-    password: '',
-    role: 'admin'
-  });
-  
-  onMount(() => {
-    loadUsers();
-  });
   
   async function loadUsers() {
     loading = true;
@@ -91,7 +82,7 @@
   
   function openEditModal(user) {
     modalMode = 'edit';
-    currentUser = user;
+    editingUser = user;
     formData = {
       name: user.name,
       email: user.email,
@@ -128,7 +119,7 @@
           role: formData.role
         };
         
-        const response = await fetch(`${API_BASE}/api/users/${currentUser.id}`, {
+        const response = await fetch(`${API_BASE}/api/users/${editingUser.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -138,7 +129,7 @@
         
         // Update password if provided
         if (formData.password) {
-          const pwdResponse = await fetch(`${API_BASE}/api/users/${currentUser.id}/password`, {
+          const pwdResponse = await fetch(`${API_BASE}/api/users/${editingUser.id}/password`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: formData.password })
