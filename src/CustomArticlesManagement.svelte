@@ -82,7 +82,7 @@
     image_url: '',
     link: '',
     author: '',
-    source_name: 'papua.news',
+    source_name: 'Papua.News',
     category_id: null,
     is_published: true,
     is_featured: false,
@@ -171,7 +171,7 @@
       image_url: '',
       link: '',
       author: '',
-      source_name: 'papua.news',
+      source_name: 'Papua.News',
       category_id: null,
       is_published: true,
       is_featured: false,
@@ -626,7 +626,9 @@
                 id="article-source"
                 type="text"
                 bind:value={formData.source_name}
-                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                readonly
+                class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 rounded-lg cursor-not-allowed"
+                title="Source name is fixed for consistency"
               />
             </div>
             
