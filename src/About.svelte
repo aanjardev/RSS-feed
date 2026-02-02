@@ -150,15 +150,6 @@
           </div>
         </div>
       </section>
-
-      <section class="bg-base-100 rounded-xl border-4 border-neutral shadow-[8px_8px_0_rgba(0,0,0,0.1)] p-8 text-center">
-        <p class="text-2xl font-bold">
-          🏔️ Tanah Papua, Tanah Cinta 🏔️
-        </p>
-        <p class="text-lg mt-2 text-base-content/70">
-          Bersama membangun Papua yang lebih baik melalui informasi
-        </p>
-      </section>
     </div>
   </main>
 
