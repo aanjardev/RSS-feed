@@ -172,6 +172,14 @@
     }
     
     await loadInitialArticles();
+    
+    // Auto-slide timer
+    const timer = setInterval(() => {
+      if (featuredNews.length > 0) {
+        currentSlide = (currentSlide + 1) % featuredNews.length;
+      }
+    }, 5000);
+    return () => clearInterval(timer);
   });
   let bodyBgColor = $state(allBodyBackgrounds[Math.floor(Math.random() * allBodyBackgrounds.length)]);
   $effect(() => {
@@ -367,19 +375,6 @@
       parent.classList.add(bgColor);
     }
   }
-
-  // Auto-slide
-  onMount(async () => {
-    await loadSettings();
-    await loadInitialArticles();
-    
-    const timer = setInterval(() => {
-      if (featuredNews.length > 0) {
-        currentSlide = (currentSlide + 1) % featuredNews.length;
-      }
-    }, 5000);
-    return () => clearInterval(timer);
-  });
 
   function nextSlide() {
     currentSlide = (currentSlide + 1) % featuredNews.length;
