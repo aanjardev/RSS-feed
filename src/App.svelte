@@ -46,6 +46,8 @@
       const response = await fetch(`${API_BASE}/api/settings/public`);
       if (response.ok) {
         settings = await response.json();
+        console.log('✅ Settings loaded:', settings);
+        console.log('📊 articles_per_source:', settings.articles_per_source);
         
         // Apply settings
         if (settings.site_name) {
@@ -195,6 +197,8 @@
       
       // Then fetch articles for each source
       const articlesPerSource = settings.articles_per_source || 10;
+      console.log('🔢 Loading initial articles with limit:', articlesPerSource);
+      console.log('⚙️ Current settings object:', settings);
       const results = await Promise.all(
         sourcesData.sources.map(async (source) => {
           const data = await fetchArticlesBySource(source.id, articlesPerSource);
@@ -279,6 +283,7 @@
     if (!source || !source.hasMore || loadingMore[sourceId]) return;
     
     const articlesPerSource = settings.articles_per_source || 10;
+    console.log('➕ Load more with limit:', articlesPerSource);
     loadingMore[sourceId] = true;
     try {
       const data = await fetchArticlesBySource(sourceId, articlesPerSource, source.skip);
