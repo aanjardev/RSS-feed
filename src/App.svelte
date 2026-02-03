@@ -196,12 +196,11 @@
       const sourcesData = await fetchAllSources();
       
       // Then fetch articles for each source
-      const articlesPerSource = settings.articles_per_source || 10;
-      console.log('🔢 Loading initial articles with limit:', articlesPerSource);
+      console.log('🔢 Loading initial articles (limit from api.js)');
       console.log('⚙️ Current settings object:', settings);
       const results = await Promise.all(
         sourcesData.sources.map(async (source) => {
-          const data = await fetchArticlesBySource(source.id, articlesPerSource);
+          const data = await fetchArticlesBySource(source.id);
           return {
             id: source.id,
             name: source.name,
@@ -227,8 +226,8 @@
               }),
               pubDate: article.pub_date
             })),
-            hasMore: data.count >= articlesPerSource,
-            skip: articlesPerSource,
+            hasMore: data.count >= (settings.articles_per_source || 10),
+            skip: (settings.articles_per_source || 10),
           };
         })
       );
@@ -250,7 +249,7 @@
       
       // Initialize visible count and loading state for each source
       newsSources.forEach((source) => {
-        visibleCount[source.id] = articlesPerSource;
+        visibleCount[source.id] = settings.articles_per_source || 10;
         loadingMore[source.id] = false;
       });
       
@@ -282,11 +281,10 @@
     const source = newsSources.find(s => s.id === sourceId);
     if (!source || !source.hasMore || loadingMore[sourceId]) return;
     
-    const articlesPerSource = settings.articles_per_source || 10;
-    console.log('➕ Load more with limit:', articlesPerSource);
+    console.log('➕ Load more (limit from api.js)');
     loadingMore[sourceId] = true;
     try {
-      const data = await fetchArticlesBySource(sourceId, articlesPerSource, source.skip);
+      const data = await fetchArticlesBySource(sourceId, null, source.skip);
       
       const newArticles = data.articles.map((article) => ({
         id: article.id,
@@ -311,14 +309,14 @@
           return {
             ...s,
             news: [...s.news, ...newArticles],
-            hasMore: data.count >= articlesPerSource,
+            hasMore: data.count >= (settings.articles_per_source || 10),
             skip: s.skip + data.count,
           };
         }
         return s;
       });
       
-      visibleCount = { ...visibleCount, [sourceId]: visibleCount[sourceId] + articlesPerSource };
+      visibleCount = { ...visibleCount, [sourceId]: visibleCount[sourceId] + (settings.articles_per_source || 10) };
     } catch (error) {
       console.error('Error loading more articles:', error);
     } finally {

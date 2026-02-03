@@ -3,8 +3,38 @@ const API_BASE_URL = import.meta.env.PROD
   ? (import.meta.env.VITE_API_URL || window.location.origin)
   : 'http://localhost:4000';
 
+// Cache settings to avoid multiple requests
+let cachedSettings = null;
+
+// Fetch settings from API
+async function fetchSettings() {
+  if (cachedSettings) {
+    return cachedSettings;
+  }
+  
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/settings/public`);
+    if (response.ok) {
+      cachedSettings = await response.json();
+      console.log('⚙️ Settings fetched in api.js:', cachedSettings);
+      return cachedSettings;
+    }
+  } catch (error) {
+    console.error('Error fetching settings in api.js:', error);
+  }
+  return null;
+}
+
 // Fetch articles from backend API (not direct RSS)
-export async function fetchArticlesBySource(sourceId, limit = 10, offset = 0) {
+export async function fetchArticlesBySource(sourceId, limit = null, offset = 0) {
+  // If limit not provided, get from settings
+  if (limit === null || limit === undefined) {
+    const settings = await fetchSettings();
+    limit = settings?.articles_per_source || 10;
+    console.log('📊 Using articles_per_source from settings:', limit);
+  }
+  
+  console.log('🌐 fetchArticlesBySource called:', { sourceId, limit, offset });
   try {
     const response = await fetch(`${API_BASE_URL}/api/articles?source_id=${sourceId}&limit=${limit}&offset=${offset}`);
 
