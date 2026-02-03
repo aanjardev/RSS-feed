@@ -369,9 +369,9 @@
   }
 
   // Auto-slide
-  onMount(() => {
-    loadSettings();
-    loadInitialArticles();
+  onMount(async () => {
+    await loadSettings();
+    await loadInitialArticles();
     
     const timer = setInterval(() => {
       if (featuredNews.length > 0) {
