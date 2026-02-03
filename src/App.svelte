@@ -627,7 +627,7 @@
         class="mx-auto w-full max-w-[1280px] grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
       >
         {#each displaySources as source, sourceIdx}
-          {@const shown = visibleCount[source.id] ?? 11}
+          {@const shown = visibleCount[source.id] ?? (settings.articles_per_source || 10)}
           {@const logoUrl = source.logo || fallbackLogo}
           
           <div
