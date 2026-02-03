@@ -30,7 +30,7 @@ export async function fetchArticlesBySource(sourceId, limit = null, offset = 0) 
   // If limit not provided, get from settings
   if (limit === null || limit === undefined) {
     const settings = await fetchSettings();
-    limit = settings?.articles_per_source || 10;
+    limit = settings?.articles_per_source || 5;
     console.log('📊 Using articles_per_source from settings:', limit);
   }
   
