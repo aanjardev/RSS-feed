@@ -150,7 +150,8 @@
   }
   
   function getCategorySettings(category) {
-    return settings.filter(s => s.category === category);
+    // Hide articles_per_source from dashboard (now controlled via api.js from database)
+    return settings.filter(s => s.category === category && s.key !== 'articles_per_source');
   }
   
   function renderSettingInput(setting) {
